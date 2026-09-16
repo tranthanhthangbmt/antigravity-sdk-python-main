@@ -1,0 +1,15 @@
+Để lấy API Key chạy hệ thống dịch tự động (sử dụng mô hình AI của Google), bạn có thể lấy hoàn toàn miễn phí tại Google AI Studio.
+
+Dưới đây là các bước lấy Key:
+
+Bạn truy cập vào trang quản lý API của Google: https://aistudio.google.com/app/apikey (yêu cầu đăng nhập bằng tài khoản Google/Gmail của bạn).
+Nhấn vào nút màu xanh "Create API Key".
+Chọn một Project hiện có hoặc tạo mới.
+Màn hình sẽ hiện ra một chuỗi ký tự dài (ví dụ: AIzaSyB...). Bạn hãy copy đoạn mã này.
+Quay lại giao diện Web App của chúng ta, dán đoạn mã vừa copy vào ô "Antigravity API Key" trên thanh tìm kiếm và bấm Start Translation.
+Hệ thống backend của chúng ta sẽ sử dụng Key này để kết nối tới bộ não LLM và tiến hành quá trình phân tích/dịch tự động tài liệu của bạn!
+
+AQ.Ab8RN6K2IeZEQR79ILA3zt4e7pqb0Cb8BNLRIXApK0vXXkEpAw
+
+AQ.Ab8RN6JLuIJub1U98f90WJ1m_9DKpUgan1Ga0VKwYHQrP6rOzw
+
