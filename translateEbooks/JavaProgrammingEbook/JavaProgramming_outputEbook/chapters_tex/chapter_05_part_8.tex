@@ -1,0 +1,168 @@
+Điều này có phần hợp lý vì phép kiểm tra đang thực hiện một việc hữu ích, đó là nó đảo ngược ý nghĩa của biến boolean (trả về giá trị \texttt{true} nếu biến là \texttt{false} và trả về \texttt{false} nếu biến là \texttt{true}). Nhưng toán tử phủ định được thiết kế để thực hiện việc chuyển đổi các giá trị boolean này, vì vậy phép kiểm tra này tốt hơn nên được viết như sau:
+
+\begin{verbatim}
+if (!negative) {
+    ...
+}
+\end{verbatim}
+
+Bạn nên làm quen với việc đọc dấu chấm than là ``not'' (phủ định), do đó phép kiểm tra này sẽ được đọc là ``nếu không phải là negative'' (if not negative). Đối với những người hiểu về Boolean Zen, đó là một cách diễn đạt ngắn gọn hơn cho phép kiểm tra so với việc kiểm tra xem \texttt{negative} có bằng \texttt{false} hay không.
+
+\subsection*{Phủ định biểu thức Boolean (Negating Boolean Expressions)}
+
+Các lập trình viên thường thấy mình cần phải tạo phủ định của một biểu thức Boolean phức tạp. Ví dụ, thông thường cách dễ nhất để suy luận về một vòng lặp (loop) là dựa trên điều kiện thoát khiến chúng ta muốn dừng vòng lặp, nhưng vòng lặp \texttt{while} lại yêu cầu chúng ta biểu diễn mã nguồn theo điều kiện tiếp tục. Giả sử bạn muốn viết một vòng lặp liên tục nhắc người dùng nhập một số nguyên cho đến khi số nguyên đó là số có hai chữ số. Vì các số có hai chữ số nằm trong khoảng từ 10 đến 99, bạn có thể sử dụng các dòng mã sau để kiểm tra xem một số có chính xác hai chữ số hay không:
+
+\begin{verbatim}
+number >= 10 && number <= 99
+\end{verbatim}
+
+Để đưa điều này vào một vòng lặp \texttt{while}, chúng ta phải đảo ngược phép kiểm tra vì phép kiểm tra của vòng lặp \texttt{while} là một phép kiểm tra tiếp tục. Nói cách cách khác, chúng ta muốn tiếp tục ở trong vòng lặp khi điều này không đúng (khi người dùng vẫn chưa cung cấp cho chúng ta một số có hai chữ số). Một cách tiếp cận là sử dụng toán tử logic NOT để phủ định biểu thức này:
+
+\begin{verbatim}
+while (!(number >= 10 && number <= 99))
+\end{verbatim}
+
+Lưu ý rằng chúng ta cần đặt toàn bộ biểu thức Boolean trong dấu ngoặc đơn và sau đó đặt toán tử NOT ở phía trước nó. Mặc dù cách tiếp cận này hoạt động được, nhưng nó thường bị coi là phong cách lập trình không tốt. Tốt nhất là nên đơn giản hóa biểu thức này.
+
+Một phương pháp tổng quát để đơn giản hóa các biểu thức như vậy đã được chính thức hóa bởi nhà logic học người Anh Augustus De Morgan. Chúng ta có thể áp dụng một trong hai quy tắc được gọi là định luật De Morgan (De Morgan's laws).
+
+Bảng 5.5 hiển thị các định luật De Morgan. Lưu ý rằng khi bạn phủ định một biểu thức Boolean, mỗi toán hạng sẽ bị phủ định ($p$ trở thành $!p$ và $q$ trở thành $!q$) và toán tử logic sẽ đảo ngược. Toán tử OR logic trở thành AND logic và ngược lại khi bạn tính toán phủ định.
+
+\subsubsection*{Bảng 5.5: Định luật De Morgan (De Morgan's Laws)}
+
+Chúng ta có thể sử dụng định luật De Morgan thứ nhất cho chương trình số có hai chữ số của mình vì chúng ta đang cố gắng tìm phủ định của một biểu thức liên quan đến toán tử AND logic. Thay vì viết:
+
+\begin{verbatim}
+while (!(number >= 10 && number <= 99))
+\end{verbatim}
+
+chúng ta có thể viết:
+
+\begin{verbatim}
+while (number < 10 || number > 99)
+\end{verbatim}
+
+Mỗi phép kiểm tra riêng lẻ đã được phủ định và toán tử AND đã được thay thế bằng toán tử OR.
+
+Hãy cùng xem xét ví dụ thứ hai liên quan đến định luật De Morgan còn lại. Giả sử bạn muốn hỏi người dùng một câu hỏi và bạn muốn bắt buộc người dùng phải trả lời ``yes'' hoặc ``no''. Nếu bạn có một biến kiểu \texttt{String} tên là \texttt{response}, bạn có thể sử dụng phép kiểm tra sau để mô tả điều bạn muốn nhận giá trị true:
+
+\begin{verbatim}
+response.equals("yes") || response.equals("no")
+\end{verbatim}
+
+Nếu chúng ta đang viết một vòng lặp để tiếp tục đọc phản hồi cho đến khi biểu thức này trả về giá trị true, thì chúng ta muốn viết vòng lặp sao cho nó sử dụng phủ định của phép kiểm tra này. Vì vậy, một lần nữa, chúng ta có thể sử dụng toán tử NOT cho toàn bộ biểu thức:
+
+\begin{verbatim}
+while (!(response.equals("yes") || response.equals("no")))
+\end{verbatim}
+
+Một lần nữa, tốt nhất là nên đơn giản hóa biểu thức bằng cách sử dụng định luật De Morgan:
+
+\begin{verbatim}
+while (!response.equals("yes") && !response.equals("no"))
+\end{verbatim}
+
+\subsection*{5.4 Lỗi của người dùng (User Errors)}
+
+Trong chương trước, bạn đã tìm hiểu rằng một thói quen lập trình tốt là suy nghĩ về các tiền điều kiện (preconditions) của một phương thức và đề cập đến chúng trong phần chú thích của phương thức đó. Bạn cũng đã biết rằng trong một số trường hợp, mã của bạn có thể ném ra các ngoại lệ (exceptions) nếu các tiền điều kiện bị vi phạm.
+
+Khi viết các chương trình tương tác, cách tiếp cận đơn giản nhất là giả định rằng người dùng sẽ cung cấp đầu vào hợp lệ. Sau đó, bạn có thể ghi lại các tiền điều kiện của mình bằng tài liệu và ném ra các ngoại lệ khi đầu vào của người dùng không như mong đợi. Tuy nhiên, nhìn chung, tốt hơn là nên viết các chương trình không đưa ra các giả định về đầu vào của người dùng. Ví dụ, bạn đã thấy đối tượng \texttt{Scanner} có thể ném ra một ngoại lệ nếu người dùng nhập sai kiểu dữ liệu. Tốt hơn hết là viết các chương trình có thể xử lý các lỗi của người dùng. Các chương trình như vậy được gọi là có tính bền vững (robust).
+
+\begin{quote}
+\textbf{Robust (Bền vững):} Khả năng của một chương trình vẫn thực thi được ngay cả khi gặp dữ liệu không hợp lệ.
+\end{quote}
+
+Trong phần này, chúng ta sẽ tìm hiểu cách viết các chương trình tương tác có tính bền vững. Tuy nhiên, trước khi có thể viết mã nguồn bền vững, bạn phải hiểu một số chức năng đặc biệt của lớp \texttt{Scanner}.
+
+\subsubsection*{Khả năng nhìn trước của Scanner (Scanner Lookahead)}
+
+Lớp \texttt{Scanner} có các phương thức cho phép bạn thực hiện kiểm tra trước khi đọc một giá trị. Nói cách khác, nó cho phép bạn nhìn trước khi nhảy (look before you leap). Đối với mỗi phương thức ``next'' của lớp \texttt{Scanner}, có một phương thức ``has'' tương ứng cho bạn biết liệu bạn có thể thực hiện thao tác đó hay không.
+
+Ví dụ, bạn sẽ thường muốn đọc một số nguyên \texttt{int} bằng đối tượng \texttt{Scanner}. Nhưng chuyện gì sẽ xảy ra nếu người dùng nhập một thứ khác không phải là số nguyên? \texttt{Scanner} có một phương thức tên là \texttt{hasNextInt} cho biết việc đọc một số nguyên có khả năng thực hiện được vào lúc này hay không. Để xác định xem có khả năng đó hay không, đối tượng \texttt{Scanner} sẽ nhìn vào token (mã báo) tiếp theo và kiểm tra xem liệu nó có thể được thông dịch thành một số nguyên hay không.
+
+Chúng ta có xu hướng giải thích một số chuỗi ký tự nhất định thành các kiểu dữ liệu cụ thể, nhưng khi chúng ta đọc các token, chúng có thể được giải thích theo những cách khác nhau. Chương trình dưới đây sẽ cho phép chúng ta khám phá khái niệm này:
+
+\begin{verbatim}
+ 1 // Prints the ways a token of input can be read by the Scanner.
+ 2 import java.util.*;
+ 3
+ 4 public class ExamineInput1 {
+ 5     public static void main(String[] args) {
+ 6         System.out.println("This program examines the ways");
+ 7         System.out.println("a token can be read.");
+ 8         System.out.println();
+ 9
+10         Scanner console = new Scanner(System.in);
+11
+12         System.out.print("token? ");
+13         System.out.println("  hasNextInt = " +
+14                            console.hasNextInt());
+15         System.out.println("  hasNextDouble = " +
+16                            console.hasNextDouble());
+17         System.out.println("  hasNext = " + console.hasNext());
+18    }
+19 }
+\end{verbatim}
+
+Hãy cùng xem một vài lượt chạy mẫu. Dưới đây là kết quả đầu ra của chương trình khi chúng ta nhập token \texttt{348}:
+
+\begin{verbatim}
+This program examines the ways 
+a token can be read. 
+ 
+token? 348 
+  hasNextInt = true 
+  hasNextDouble = true 
+  hasNext = true 
+\end{verbatim}
+
+Đúng như bạn mong đợi, lệnh gọi \texttt{hasNextInt} trả về \texttt{true}, nghĩa là chúng ta có thể hiểu token này là một số nguyên. \texttt{Scanner} cũng cho phép chúng ta hiểu token này dưới dạng một số thực \texttt{double}, vì vậy \texttt{hasNextDouble} cũng trả về \texttt{true}. Nhưng hãy chú ý rằng \texttt{hasNext()} cũng trả về \texttt{true}. Kết quả đó có nghĩa là chúng ta có thể gọi phương thức \texttt{next} để đọc token này dưới dạng một chuỗi ký tự (\texttt{String}).
+
+Đây là một lượt chạy khác, lần này dành cho token \texttt{348.2}:
+
+\begin{verbatim}
+This program examines the ways 
+a token can be read. 
+ 
+token? 348.2 
+  hasNextInt = false 
+  hasNextDouble = true 
+  hasNext = true 
+\end{verbatim}
+
+Token này không thể hiểu là một số nguyên (\texttt{int}), nhưng nó có thể hiểu là một số thực (\texttt{double}) hoặc một chuỗi (\texttt{String}). Cuối cùng, hãy xem xét lượt chạy này đối với token \texttt{hello}:
+
+\begin{verbatim}
+This program examines the ways 
+a token can be read. 
+ 
+token? hello 
+  hasNextInt = false 
+  hasNextDouble = false 
+  hasNext = true 
+\end{verbatim}
+
+Token \texttt{hello} không thể hiểu là một số nguyên (\texttt{int}) hoặc số thực (\texttt{double}); nó chỉ có thể hiểu là một chuỗi (\texttt{String}).
+
+\subsubsection*{Xử lý lỗi của người dùng (Handling User Errors)}
+
+Hãy xem xét đoạn mã sau:
+
+\begin{verbatim}
+Scanner console = new Scanner(System.in);
+System.out.print("How old are you? ");
+int age = console.nextInt();
+\end{verbatim}
+
+Điều gì xảy ra nếu người dùng nhập một thứ không phải là số nguyên? Nếu điều đó xảy ra, \texttt{Scanner} sẽ ném ra một ngoại lệ tại lệnh gọi phương thức \texttt{nextInt}. Ở phần trước, chúng ta đã thấy rằng mình có thể kiểm tra xem token tiếp theo có thể hiểu là một số nguyên hay không bằng cách sử dụng phương thức \texttt{hasNextInt}. Do đó, chúng ta có thể kiểm tra trước khi đọc một số nguyên xem liệu người dùng đã nhập giá trị phù hợp hay chưa.
+
+Nếu người dùng nhập thứ gì đó không phải là số nguyên, chúng ta muốn hủy bỏ dữ liệu đầu vào đó, in ra một loại thông báo lỗi nào đó và yêu cầu nhập lại lần hai. Chúng ta muốn đoạn mã này thực thi trong một vòng lặp để tiếp tục hủy bỏ đầu vào và tạo thông báo lỗi khi cần thiết cho đến khi người dùng nhập dữ liệu hợp lệ.
+
+Dưới đây là nỗ lực đầu tiên cho một giải pháp bằng mã giả (pseudocode):
+
+\begin{verbatim}
+while (người dùng chưa nhập một số nguyên) {
+    yêu cầu nhập.
+    hủy bỏ đầu vào.
+    tạo một thông báo lỗi.
+\end{verbatim}

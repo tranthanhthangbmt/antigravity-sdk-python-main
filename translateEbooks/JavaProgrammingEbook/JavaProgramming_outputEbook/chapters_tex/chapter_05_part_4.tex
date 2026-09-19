@@ -1,0 +1,204 @@
+\section{Phần dịch trang 30 đến 40}
+Một giải pháp là dựng một trong các cây cột trước hoặc sau vòng lặp (loop). Giải pháp thông thường là thực hiện việc đó trước:
+
+\begin{verbatim}
+dựng một cây cột.
+for (chiều dài của hàng rào) {
+    buộc một sợi dây thép.
+    dựng một cây cột.
+}
+\end{verbatim}
+
+
+Lưu ý rằng thứ tự của hai thao tác trong thân vòng lặp bây giờ đã được đảo ngược vì cây cột đầu tiên được dựng trước khi đi vào vòng lặp.
+
+Một ví dụ đơn giản, hãy xem xét bài toán in ra các số nguyên từ 1 đến 10, phân tách bằng dấu phẩy. Nói cách khác, chúng ta muốn có kết quả đầu ra sau:
+ 
+\begin{verbatim}
+1, 2, 3, 4, 5, 6, 7, 8, 9, 10 
+\end{verbatim}
+
+
+Nhiệm vụ này là một bài toán hàng rào (fencepost problem) kinh điển vì chúng ta muốn in ra 10 con số nhưng chỉ có 9 dấu phẩy. Theo thuật ngữ hàng rào của chúng ta, việc ghi một con số là phần ``cột'' (post) của nhiệm vụ và ghi một dấu phẩy là phần ``dây thép'' (wire). Vì vậy, triển khai mã giả (pseudocode) mà chúng ta đã xây dựng, chúng ta in số đầu tiên trước vòng lặp và đảo ngược thứ tự các thao tác bên trong vòng lặp bằng cách in một dấu phẩy trước một con số:
+
+\begin{verbatim}
+System.out.print(1);
+for (int i = 2; i <= 10; i++) {
+    System.out.print(", " + i);
+}
+System.out.println();
+\end{verbatim}
+
+
+\subsection*{Hàng rào với if}
+
+Nhiều vòng lặp hàng rào mà bạn viết sẽ yêu cầu thực thi có điều kiện. Trên thực tế, bản thân bài toán hàng rào có thể được giải quyết bằng một câu lệnh \texttt{if}. Hãy nhớ rằng giải pháp kinh điển cho bài toán hàng rào là xử lý cây cột đầu tiên trước khi vòng lặp bắt đầu:
+
+\begin{verbatim}
+dựng một cây cột.
+for (chiều dài của hàng rào) {
+    buộc một sợi dây thép.
+    dựng một cây cột.
+}
+\end{verbatim}
+
+
+Giải pháp này giải quyết được vấn đề, nhưng nó có thể gây bối rối vì bên trong vòng lặp, các bước dường như có thứ tự ngược lại. Bạn có thể sử dụng một câu lệnh \texttt{if} và giữ nguyên thứ tự ban đầu của các bước:
+
+\begin{verbatim}
+for (chiều dài của hàng rào) {
+    dựng một cây cột.
+    if (đây không phải là cây cột cuối cùng) {
+        buộc một sợi dây thép.
+    }
+}
+\end{verbatim}
+
+
+Biến thể này không được sử dụng thường xuyên như giải pháp kinh điển vì nó liên quan đến cả điều kiện kiểm tra vòng lặp và điều kiện kiểm tra bên trong vòng lặp. Thường thì các kiểm tra này gần như giống hệt nhau, vì vậy việc kiểm tra cùng một thứ hai lần mỗi khi vòng lặp thực thi là không hiệu quả. Nhưng sẽ có những tình huống mà bạn có thể sử dụng cách tiếp cận này. Ví dụ, trong cách tiếp cận kinh điển, các dòng mã tương ứng với việc dựng một cây cột bị lặp lại. Nếu bạn đang viết một chương trình mà bước này đòi hỏi nhiều mã, bạn có thể quyết định rằng việc đặt câu lệnh \texttt{if} bên trong vòng lặp là một cách tiếp cận tốt hơn, ngay cả khi nó dẫn đến một số kiểm tra bổ sung.
+
+Ví dụ, hãy xem xét việc viết một phương thức gọi là \texttt{multiprint} để in một chuỗi với một số lần cụ thể. Giả sử bạn muốn kết quả đầu ra nằm trên một dòng riêng biệt, bên trong dấu ngoặc vuông và được phân tách bằng dấu phẩy. Dưới đây là hai lệnh gọi ví dụ:
+
+\begin{verbatim}
+multiprint("please", 4);
+multiprint("beetlejuice", 3);
+\end{verbatim}
+
+
+Bạn kỳ vọng những lệnh gọi này sẽ tạo ra kết quả đầu ra sau:
+ 
+\begin{verbatim}
+[please, please, please, please] 
+[beetlejuice, beetlejuice, beetlejuice] 
+\end{verbatim}
+
+
+Nỗ lực đầu tiên của bạn trong việc viết phương thức này có thể là một vòng lặp đơn giản in các dấu ngoặc vuông bên ngoài vòng lặp và in chuỗi cùng dấu phẩy bên trong vòng lặp:
+
+\begin{verbatim}
+public static void multiprint(String s, int times) {
+    System.out.print("[");
+    for (int i = 1; i <= times; i++) {
+        System.out.print(s + ", ");
+    }
+    System.out.println("]");
+}
+\end{verbatim}
+
+
+Rất tiếc, đoạn mã này tạo ra một dấu phẩy thừa sau giá trị cuối cùng:
+ 
+\begin{verbatim}
+[please, please, please, please, ] 
+[beetlejuice, beetlejuice, beetlejuice, ] 
+\end{verbatim}
+
+
+Bởi vì dấu phẩy là ký tự phân tách, bạn muốn số chuỗi in ra nhiều hơn số dấu phẩy một đơn vị (ví dụ: hai dấu phẩy để phân tách ba lần xuất hiện của ``beetlejuice''). Bạn có thể sử dụng giải pháp kinh điển cho bài toán hàng rào để đạt được hiệu ứng này bằng cách in một chuỗi bên ngoài vòng lặp và đảo ngược thứ tự in bên trong vòng lặp:
+
+\begin{verbatim}
+public static void multiprint(String s, int times) {
+    System.out.print("[" + s);
+    for (int i = 2; i <= times; i++) {
+        System.out.print(", " + s);
+    }
+    System.out.println("]");
+}
+\end{verbatim}
+
+
+Lưu ý rằng vì bạn đang in một trong các chuỗi trước khi vòng lặp bắt đầu, bạn phải sửa đổi vòng lặp để nó không in nhiều chuỗi như trước nữa. Việc điều chỉnh biến vòng lặp \texttt{i} bắt đầu từ hai sẽ bù cho giá trị đầu tiên được in trước vòng lặp.
+
+Rất tiếc, giải pháp này cũng hoạt động không chính xác. Hãy xem xét điều gì xảy ra khi bạn yêu cầu phương thức in một chuỗi không lần (0 lần), như trong:
+
+\begin{verbatim}
+multiprint("please don't", 0);
+\end{verbatim}
+
+
+Lệnh gọi này tạo ra kết quả đầu ra không chính xác sau:
+ 
+\begin{verbatim}
+[please don't] 
+\end{verbatim}
+
+
+Bạn muốn người dùng có thể yêu cầu xuất hiện không lần một chuỗi, vì vậy phương thức không nên tạo ra kết quả đầu ra không chính xác đó. Vấn đề là giải pháp kinh điển cho bài toán hàng rào liên quan đến việc in một giá trị trước khi vòng lặp bắt đầu. Để phương thức hoạt động chính xác cho trường hợp bằng không, bạn có thể bao gồm một câu lệnh \texttt{if/else}:
+
+\begin{verbatim}
+public static void multiprint(String s, int times) {
+    if (times == 0) {
+        System.out.println("[]");
+
+    } else {
+        System.out.print("[" + s);
+        for (int i = 2; i <= times; i++) {
+            System.out.print(", " + s);
+        }
+        System.out.println("]");
+    }
+}
+\end{verbatim}
+
+
+Ngoài ra, bạn có thể bao gồm một câu lệnh \texttt{if} bên trong vòng lặp (cách tiếp cận kiểm tra kép):
+
+\begin{verbatim}
+public static void multiprint(String s, int times) {
+    System.out.print("[");
+    for (int i = 1; i <= times; i++) {
+        System.out.print(s);
+        if (i < times) {
+            System.out.print(", ");
+        }
+    }
+    System.out.println("]");
+}
+\end{verbatim}
+
+
+Mặc dù phiên bản mã trước đó thực hiện một phép kiểm tra tương tự hai lần trong mỗi lần lặp, nhưng nó đơn giản hơn so với việc sử dụng giải pháp hàng rào kinh điển và trường hợp đặc biệt của nó. Không có giải pháp nào tốt hơn giải pháp nào, vì luôn có sự đánh đổi. Nếu bạn nghĩ rằng mã sẽ được thực thi thường xuyên và vòng lặp sẽ lặp lại nhiều lần, bạn có thể có xu hướng sử dụng giải pháp hiệu quả hơn. Ngược lại, bạn có thể chọn mã đơn giản hơn.
+
+\subsection*{Vòng lặp Sentinel (Sentinel Loops)}
+
+Giả sử bạn muốn đọc một loạt số từ người dùng và tính tổng của chúng. Bạn có thể hỏi trước người dùng xem cần đọc bao nhiêu số, như chúng ta đã làm trong chương trước, nhưng điều đó không phải lúc nào cũng thuận tiện. Điều gì sẽ xảy ra nếu người dùng có một danh sách dài các số cần nhập và chưa đếm chúng? Một cách để tránh việc hỏi số lượng là chọn một giá trị nhập đặc biệt để báo hiệu kết thúc nhập liệu. Chúng tôi gọi đây là giá trị lính canh (sentinel value).
+
+\paragraph{Sentinel (Lính canh)}
+Một giá trị đặc biệt báo hiệu kết thúc nhập liệu.
+
+Ví dụ, bạn có thể yêu cầu người dùng nhập giá trị $-1$ để dừng nhập số. Nhưng làm thế nào để bạn cấu trúc mã của mình để sử dụng lính canh này? Nói chung, bạn sẽ muốn sử dụng cách tiếp cận sau:
+
+\begin{verbatim}
+sum = 0.
+while (chúng ta chưa thấy lính canh) {
+    nhắc và đọc giá trị.
+    cộng nó vào tổng.
+}
+\end{verbatim}
+
+
+Cách tiếp cận này không hoàn toàn hoạt động tốt. Ví dụ, giả sử người dùng nhập các số $10$, $42$, $5$ và $-1$. Như mã giả chỉ ra, chúng ta sẽ nhắc và đọc từng giá trị trong số bốn giá trị này rồi cộng chúng vào tổng cho đến khi gặp giá trị lính canh $-1$. Chúng ta khởi tạo tổng bằng $0$, vì vậy phép tính này tính $(10 + 42 + 5 + (-1))$, bằng $56$. Nhưng câu trả lời đúng phải là $57$. Giá trị lính canh $-1$ không được phép tính vào tổng.
+
+Bài toán này là một bài toán hàng rào (fencepost) hoặc ``vòng lặp rưỡi'' (loop-and-a-half) kinh điển: Bạn muốn nhắc và đọc một loạt số, bao gồm cả lính canh, và bạn muốn cộng hầu hết các số lại, nhưng bạn không muốn cộng lính canh vào tổng.
+
+Giải pháp hàng rào thông thường hoạt động hiệu quả: Chúng ta chèn câu lệnh nhắc-và-đọc đầu tiên trước vòng lặp và đảo ngược thứ tự của hai bước trong thân vòng lặp:
+
+\begin{verbatim}
+sum = 0.
+nhắc và đọc giá trị.
+while (chúng ta chưa thấy lính canh) {
+    cộng nó vào tổng.
+    nhắc và đọc giá trị.
+}
+\end{verbatim}
+
+
+Sau đó, bạn có thể tinh chỉnh mã giả này bằng cách đưa vào một biến cho số được đọc từ người dùng:
+
+\begin{verbatim}
+sum = 0.
+nhắc và đọc một giá trị vào n.
+while (n không phải là lính canh) {
+    cộng n vào tổng.
+\end{verbatim}
+

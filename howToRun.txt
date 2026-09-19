@@ -1,3 +1,49 @@
+Chào bạn, để chạy hệ thống web này (gồm phần Frontend dùng React và Backend dùng FastAPI), bạn cần mở 2 terminal (cửa sổ dòng lệnh) riêng biệt để chạy song song. Dưới đây là hướng dẫn chi tiết từng bước:
+
+1. Chạy Backend (FastAPI - Python)
+Mở một cửa sổ terminal mới (bạn có thể mở trong VS Code) và thực hiện các bước sau:
+
+Bước 1: Di chuyển vào thư mục backend
+
+powershell
+cd d:\MY_CODE\Antigravity_SDK1\antigravity-sdk-python-main\translateEbooks\WebApp\backend
+Bước 2: Cài đặt các thư viện cần thiết (nếu bạn chưa cài) Hệ thống sử dụng FastAPI, Uvicorn, thư viện của Google Gemini và PyMuPDF. Bạn chạy lệnh:
+
+powershell
+pip install fastapi uvicorn google-generativeai pymupdf websockets
+Bước 3: Chạy server backend Sau khi đã cài xong, bạn gõ lệnh sau để khởi động server:
+
+powershell
+python main.py
+Server sẽ chạy ở địa chỉ: http://localhost:8000
+
+2. Chạy Frontend (React + Vite)
+Mở một cửa sổ terminal thứ hai và thực hiện:
+
+Bước 1: Di chuyển vào thư mục frontend
+
+powershell
+cd d:\MY_CODE\Antigravity_SDK1\antigravity-sdk-python-main\translateEbooks\WebApp\frontend
+Bước 2: Cài đặt các gói npm (nếu chạy lần đầu)
+
+powershell
+npm install
+Bước 3: Khởi động giao diện web
+
+powershell
+npm run dev
+Sau khi chạy thành công, terminal sẽ hiện ra một đường link (thường là http://localhost:5173). Bạn bấm chuột vào link đó hoặc copy dán vào trình duyệt web để mở ứng dụng.
+
+3. Cách sử dụng (Theo file hướng dẫn)
+Như trong file howToRun.txt của bạn đã ghi, hệ thống dịch này yêu cầu một API Key của Google AI Studio để có thể hoạt động.
+
+Bạn truy cập Google AI Studio (API Key).
+Tạo hoặc copy một API Key hiện có (Nó là một đoạn mã dài bắt đầu bằng AIzaSy...).
+Mở trang web ứng dụng ở bước 2, dán đoạn mã Key vừa copy vào ô "Antigravity API Key" trên thanh tìm kiếm của trang web.
+Bấm Start Translation để hệ thống bắt đầu dịch sách.
+Bạn hãy thử chạy theo các bước trên nhé! Nếu gặp lỗi thiếu thư viện hay lỗi ở bước nào thì hãy nhắn lại để tôi hỗ trợ thêm.
+-----------------------------------
+
 Để lấy API Key chạy hệ thống dịch tự động (sử dụng mô hình AI của Google), bạn có thể lấy hoàn toàn miễn phí tại Google AI Studio.
 
 Dưới đây là các bước lấy Key:
@@ -13,3 +59,6 @@ AQ.Ab8RN6K2IeZEQR79ILA3zt4e7pqb0Cb8BNLRIXApK0vXXkEpAw
 
 AQ.Ab8RN6JLuIJub1U98f90WJ1m_9DKpUgan1Ga0VKwYHQrP6rOzw
 
+AQ.Ab8RN6Kf0bt_9F1WOjho548vXo0cpfCrVNKMwDBrUt2vMY8jDQ
+
+AQ.Ab8RN6IHjduHiO63woLFpTNZTpkASp9jkHBVdegEMo3-GNQ0zg

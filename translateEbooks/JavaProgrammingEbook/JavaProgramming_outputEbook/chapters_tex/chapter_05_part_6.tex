@@ -1,0 +1,156 @@
+\section{Phần dịch trang 50 đến 60}
+Theo các quy tắc thứ tự ưu tiên này, khi Java đánh giá một biểu thức như biểu thức dưới đây, máy tính sẽ đánh giá toán tử NOT trước, tiếp theo là AND, và sau đó là OR.
+
+\begin{verbatim}
+if (test1 || !test2 && test3) {
+    doSomething();
+}
+\end{verbatim}
+
+\subsection*{Đánh giá ngắn mạch (Short-Circuited Evaluation)}
+
+Trong phần này, chúng ta sẽ khám phá việc sử dụng các toán tử logic để giải quyết một tác vụ lập trình phức tạp, và chúng ta sẽ giới thiệu một thuộc tính quan trọng của các toán tử này. Chúng ta sẽ viết một phương thức tên là \texttt{firstWord} nhận vào một \texttt{String} làm tham số và trả về từ đầu tiên trong chuỗi đó. Để mọi thứ đơn giản, chúng ta quy ước rằng một \texttt{String} được phân tách thành các từ riêng lẻ bằng các khoảng trắng. Nếu \texttt{String} hoàn toàn không có từ nào, phương thức sẽ trả về một chuỗi rỗng. Dưới đây là một số ví dụ gọi hàm:
+
+Hãy nhớ rằng chúng ta có thể gọi phương thức \texttt{substring} để trích xuất một phần của chuỗi. Chúng ta truyền hai tham số vào phương thức \texttt{substring}: chỉ số bắt đầu (starting index) của chuỗi con và chỉ số lớn hơn chỉ số kết thúc một đơn vị. Nếu chuỗi được lưu trữ trong một biến tên là \texttt{s}, nhiệm vụ của chúng ta cơ bản được rút gọn thành các bước sau:
+\begin{itemize}
+    \item đặt \texttt{start} thành chỉ số đầu tiên của từ.
+    \item đặt \texttt{stop} thành chỉ số ngay sau từ đó.
+    \item trả về \texttt{s.substring(start, stop)}.
+\end{itemize}
+
+Để tiếp cận bước đầu, hãy giả định rằng chỉ số bắt đầu là 0. Chỉ số bắt đầu này sẽ không hoạt động đối với các chuỗi bắt đầu bằng các khoảng trắng, nhưng nó sẽ cho phép chúng ta tập trung vào bước thứ hai trong mã giả (pseudocode).
+
+Hãy xem xét một chuỗi bắt đầu bằng \texttt{"four score"}. Nếu chúng ta kiểm tra các ký tự riêng lẻ của chuỗi và chỉ số của chúng, chúng ta sẽ thấy mẫu sau:
+
+Chúng ta đặt \texttt{start} thành 0. Chúng ta muốn đặt biến \texttt{stop} thành chỉ số ngay sau từ đầu tiên kết thúc. Trong ví dụ này, từ chúng ta muốn lấy là \texttt{"four"}, và nó kéo dài từ chỉ số 0 đến 3. Vì vậy, nếu chúng ta muốn biến \texttt{stop} lớn hơn chỉ số kết thúc một đơn vị, chúng ta muốn đặt nó thành chỉ số 4, vị trí của khoảng trắng đầu tiên trong chuỗi.
+
+Vậy làm thế nào để chúng ta tìm thấy khoảng trắng đầu tiên trong chuỗi? Chúng ta sử dụng một vòng lặp (loop) \texttt{while}. Chúng ta chỉ cần bắt đầu từ đầu chuỗi và lặp cho đến khi gặp một khoảng trắng:
+\begin{itemize}
+    \item đặt \texttt{stop} thành 0.
+    \item trong khi (ký tự tại chỉ số \texttt{stop} không phải là khoảng trắng) \{
+    \begin{itemize}
+        \item tăng \texttt{stop} lên 1.
+    \end{itemize}
+    \}
+\end{itemize}
+
+Điều này có thể dễ dàng chuyển đổi thành mã Java. Kết hợp nó với giả định của chúng ta rằng \texttt{start} sẽ bằng 0, chúng ta có:
+
+\begin{verbatim}
+public static String firstWord(String s) {
+    int start = 0;
+    int stop = 0;
+    while (s.charAt(stop) != ' ') {
+        stop++;
+    }
+    return s.substring(start, stop);
+}
+\end{verbatim}
+
+Phiên bản này của phương thức hoạt động trong nhiều trường hợp, bao gồm cả chuỗi mẫu của chúng ta, nhưng nó không hoạt động với mọi chuỗi. Nó có hai hạn chế lớn. Chúng ta đã bắt đầu bằng cách giả định rằng chuỗi không bắt đầu bằng khoảng trắng, vì vậy chúng ta biết mình phải khắc phục hạn chế đó.
+
+Vấn đề thứ hai là phiên bản \texttt{firstWord} này không hoạt động trên các chuỗi chỉ có một từ. Ví dụ, nếu chúng ta thực thi nó với một chuỗi như \texttt{"four"}, nó sẽ tạo ra một ngoại lệ \texttt{StringIndex\allowbreak{}OutOfBounds\allowbreak{}Exception} chỉ ra rằng 4 không phải là một chỉ số hợp lệ. Ngoại lệ xảy ra vì mã của chúng ta giả định rằng cuối cùng chúng ta sẽ tìm thấy một khoảng trắng, nhưng không có khoảng trắng nào trong chuỗi \texttt{"four"}. Vì vậy, \texttt{stop} được tăng lên cho đến khi bằng 4, và một ngoại lệ được ném ra vì không có ký tự nào ở chỉ số 4. Điều này đôi khi được gọi là ``vượt quá giới hạn cuối của chuỗi'' (running off the end of the string).
+
+Để giải quyết vấn đề này, chúng ta cần kết hợp một điều kiện kiểm tra liên quan đến độ dài của chuỗi. Nhiều người mới học lập trình cố gắng thực hiện điều này bằng cách sử dụng một số sự kết hợp của \texttt{while} và \texttt{if}, như trong đoạn mã sau:
+
+\begin{verbatim}
+int stop = 0;
+while (stop < s.length()) {
+    if (s.charAt(stop) != ' ') {
+       stop++;
+    }
+}
+\end{verbatim}
+
+Đoạn mã này hoạt động đối với các chuỗi một từ như \texttt{"four"} vì ngay khi \texttt{stop} bằng độ dài của chuỗi, chúng ta sẽ thoát ra khỏi vòng lặp. Tuy nhiên, nó không hoạt động đối với các trường hợp nhiều từ ban đầu như \texttt{"four score"}. Chúng ta kết thúc trong một vòng lặp vô hạn (infinite loop) vì một khi \texttt{stop} bằng 4, chúng ta ngừng tăng nó, nhưng chúng ta lại bị mắc kẹt bên trong vòng lặp vì điều kiện kiểm tra yêu cầu tiếp tục miễn là \texttt{stop} nhỏ hơn độ dài của chuỗi. Cách tiếp cận đặt một câu lệnh \texttt{if} bên trong một vòng lặp \texttt{while} này đã dẫn đến một lỗi nổi tiếng thế giới vào ngày 31 tháng 12 năm 2008, khi các máy nghe nhạc Zune trên toàn thế giới ngừng hoạt động (xem Bài tập tự kiểm tra 21 để biết thêm chi tiết).
+
+Điểm cần nhận ra là trong trường hợp này chúng ta cần sử dụng hai điều kiện khác nhau để kiểm soát vòng lặp. Chúng ta chỉ muốn tiếp tục tăng \texttt{stop} nếu chúng ta biết rằng mình chưa gặp khoảng trắng và chưa đi đến cuối chuỗi. Chúng ta có thể thể hiện ý tưởng đó bằng cách sử dụng toán tử logic AND (\texttt{\&\&}):
+
+\begin{verbatim}
+int stop = 0;
+while (s.charAt(stop) != ' ' && stop < s.length()) {
+    stop++;
+}
+\end{verbatim}
+
+Thật không may, ngay cả điều kiện kiểm tra này cũng không hoạt động. Nó thể hiện đúng hai điều kiện, vì chúng ta muốn đảm bảo rằng mình chưa gặp khoảng trắng và chúng ta muốn đảm bảo rằng mình chưa đi đến cuối chuỗi. Nhưng hãy nghĩ xem điều gì xảy ra ngay khi chúng ta chạm đến cuối chuỗi. Giả sử \texttt{s} là \texttt{"four"} và \texttt{stop} bằng 3.
+
+Chúng ta thấy ký tự tại chỉ số 3 không phải là khoảng trắng và chúng ta thấy \texttt{stop} nhỏ hơn độ dài của chuỗi, vì vậy chúng ta tăng thêm một lần nữa và \texttt{stop} trở thành 4. Khi chúng ta quay lại vòng lặp, chúng ta kiểm tra xem \texttt{s.charAt(4)} có phải là khoảng trắng hay không. Việc kiểm tra này ném ra một ngoại lệ vì chỉ số nằm ngoài giới hạn. Chúng ta cũng kiểm tra xem \texttt{stop} có nhỏ hơn 4 hay không, điều này không đúng, nhưng việc kiểm tra đó diễn ra quá muộn để tránh ngoại lệ.
+
+Java cung cấp một giải pháp cho tình huống này. Các toán tử logic \texttt{\&\&} và \texttt{||} sử dụng cơ chế đánh giá ngắn mạch (short-circuited evaluation).
+
+\paragraph{Đánh giá ngắn mạch (Short-Circuited Evaluation)}
+Thuộc tính của các toán tử logic \texttt{\&\&} và \texttt{||} giúp ngăn toán hạng thứ hai bị đánh giá nếu kết quả tổng thể đã rõ ràng từ giá trị của toán hạng đầu tiên.
+
+Trong trường hợp của chúng ta, chúng ta đang thực hiện hai kiểm tra khác nhau và yêu cầu phép AND logic của hai kiểm tra đó. Nếu một trong hai kiểm tra thất bại, kết quả tổng thể sẽ là \texttt{false}, vì vậy nếu kiểm tra đầu tiên thất bại, không cần thiết phải thực hiện kiểm tra thứ hai. Do đánh giá ngắn mạch—nghĩa là vì kết quả tổng thể đã rõ ràng từ kiểm tra đầu tiên—chúng ta hoàn toàn không thực hiện kiểm tra thứ hai. Nói cách khác, việc thực hiện và đánh giá kiểm tra thứ hai bị ngăn chặn (ngắn mạch) bởi thực tế là kiểm tra đầu tiên đã thất bại.
+
+Điều này có nghĩa là chúng ta cần đảo ngược thứ tự của hai kiểm tra này:
+
+\begin{verbatim}
+int stop = 0;
+while (stop < s.length() && s.charAt(stop) != ' ') {
+    stop++;
+}
+\end{verbatim}
+
+Nếu chúng ta chạy lại kịch bản tương tự với \texttt{stop} bằng 3, chúng ta vượt qua cả hai bài kiểm tra này và tăng \texttt{stop} lên 4. Sau đó, khi quay lại vòng lặp một lần nữa, trước tiên chúng ta kiểm tra xem \texttt{stop} có nhỏ hơn \texttt{s.length()} hay không. Điều này không đúng, nghĩa là phép kiểm tra trả về giá trị \texttt{false}. Kết quả là, Java biết rằng biểu thức tổng thể sẽ có kết quả là \texttt{false} và không bao giờ đánh giá phép kiểm tra thứ hai. Thứ tự sự kiện này ngăn chặn ngoại lệ xảy ra, vì chúng ta không bao giờ kiểm tra xem \texttt{s.charAt(4)} có phải là khoảng trắng hay không.
+
+Giải pháp này cung cấp cho chúng ta phiên bản thứ hai của phương thức:
+
+\begin{verbatim}
+public static String firstWord(String s) {
+    int start = 0;
+    int stop = 0;
+    while (stop < s.length() && s.charAt(stop) != ' ') {
+        stop++;
+    }
+    return s.substring(start, stop);
+}
+\end{verbatim}
+
+Nhưng hãy nhớ rằng chúng ta đã giả định từ đầu tiên bắt đầu ở vị trí 0. Điều đó không nhất thiết luôn đúng. Ví dụ, nếu chúng ta truyền một chuỗi bắt đầu bằng nhiều khoảng trắng, phương thức này sẽ trả về một chuỗi rỗng. Chúng ta cần sửa đổi mã nguồn để nó bỏ qua bất kỳ khoảng trắng dẫn đầu nào. Để đạt được mục tiêu đó yêu cầu một vòng lặp khác. Để tiếp cận bước đầu, chúng ta có thể viết đoạn mã sau:
+
+\begin{verbatim}
+int start = 0;
+while (s.charAt(start) == ' ') {
+    start++;
+}
+\end{verbatim}
+
+Đoạn mã này hoạt động đối với hầu hết các chuỗi, nhưng nó thất bại trong hai trường hợp quan trọng. Phép kiểm tra vòng lặp giả định rằng chúng ta sẽ tìm thấy một ký tự không phải khoảng trắng. Điều gì xảy ra nếu chuỗi hoàn toàn chứa các khoảng trắng? Trong trường hợp đó, chúng ta sẽ chỉ đơn giản là chạy quá giới hạn cuối của chuỗi, tạo ra một ngoại lệ \texttt{StringIndex\allowbreak{}OutOfBounds\allowbreak{}Exception}. Và điều gì xảy ra nếu ngay từ đầu chuỗi đã trống? Chúng ta sẽ gặp lỗi ngay lập tức khi chúng ta truy vấn \texttt{s.charAt(0)}, bởi vì không có ký tự nào ở chỉ số 0.
+
+Chúng ta có thể quyết định rằng những trường hợp này cấu thành lỗi. Sau cùng, làm thế nào bạn có thể trả về từ đầu tiên nếu không có từ nào? Vì vậy, chúng ta có thể tài liệu hóa một tiền điều kiện (precondition) rằng chuỗi phải chứa ít nhất một ký tự không phải khoảng trắng, và ném ra một ngoại lệ nếu chúng ta thấy rằng nó không thỏa mãn. Một cách tiếp cận khác là trả về một chuỗi rỗng trong các trường hợp này.
+
+Để giải quyết khả năng chuỗi có thể trống, chúng ta cần sửa đổi vòng lặp của mình để kết hợp phép kiểm tra độ dài của chuỗi. Nếu chúng ta thêm nó vào cuối kiểm tra vòng lặp \texttt{while} của mình, chúng ta có đoạn mã sau:
+
+\begin{verbatim}
+int start = 0;
+while (s.charAt(start) == ' ' && start < s.length()) {
+    start++;
+}
+\end{verbatim}
+
+Nhưng đoạn mã này có cùng một khuyết điểm như chúng ta đã thấy trước đây. Nó được cho là để ngăn ngừa các vấn đề khi \texttt{start} bằng độ dài của chuỗi, nhưng khi tình huống này xảy ra, một \texttt{StringIndex\allowbreak{}OutOfBounds\allowbreak{}Exception} sẽ được ném ra trước khi máy tính thực hiện kiểm tra độ dài của chuỗi. Vì vậy, các phép kiểm tra này cũng phải được đảo ngược để tận dụng cơ chế đánh giá ngắn mạch:
+
+\begin{verbatim}
+int start = 0;
+while (start < s.length() && s.charAt(start) == ' ') {
+    start++;
+}
+\end{verbatim}
+
+Để kết hợp các dòng mã này với mã trước đó của chúng ta, chúng ta phải thay đổi việc khởi tạo \texttt{stop}. Chúng ta không còn muốn tìm kiếm từ đầu chuỗi nữa. Thay vào đó, chúng ta cần khởi tạo \texttt{stop} bằng \texttt{start}. Ghép các phần này lại với nhau, chúng ta có được phiên bản phương thức sau:
+
+\begin{verbatim}
+public static String firstWord(String s) {
+    int start = 0;
+    while (start < s.length() && s.charAt(start) == ' ') {
+        start++;
+    }
+    int stop = start;
+    while (stop < s.length() && s.charAt(stop) != ' ') {
+        stop++;
+    }
+    return s.substring(start, stop);
+}
+\end{verbatim}

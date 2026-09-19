@@ -1,0 +1,183 @@
+\section{Phần dịch trang 60 đến 70}
+Phiên bản này hoạt động trong mọi trường hợp, bỏ qua mọi khoảng trống dẫn đầu và trả về một chuỗi rỗng nếu không có từ nào để trả về.
+
+\subsection*{Biến và Cờ boolean (boolean Variables and Flags)}
+
+Tất cả các câu lệnh if/else đều được kiểm soát bởi các phép thử Boolean. Các phép thử này có thể là các biến boolean hoặc các biểu thức Boolean. Hãy xem xét ví dụ về đoạn mã sau:
+
+\begin{verbatim}
+if (number > 0) {
+    System.out.println("positive");
+} else {
+    System.out.println("not positive");
+}
+\end{verbatim}
+
+Đoạn mã này có thể được viết lại như sau:
+
+\begin{verbatim}
+boolean positive = (number > 0);
+if (positive) {
+    System.out.println("positive");
+} else {
+
+    System.out.println("not positive");
+}
+\end{verbatim}
+
+Việc sử dụng các biến boolean giúp tăng khả năng đọc hiểu (readability) cho chương trình của bạn vì nó cho phép bạn đặt tên cho các phép thử. Hãy xem xét loại mã nguồn bạn sẽ tạo ra cho một chương trình hẹn hò. Bạn có thể có một số biến số nguyên mô tả các thuộc tính nhất định của một người: \texttt{looks}, để lưu trữ ước tính thô về vẻ đẹp ngoại hình (trên thang điểm từ 1--10); \texttt{IQ}, để lưu trữ chỉ số thông minh; \texttt{income}, để lưu trữ tổng thu nhập hàng năm; và \texttt{snothers}, để theo dõi những người bạn thân thiết ("snother" là viết tắt của "significant other" -- người đặc biệt). Với các biến này để xác định thuộc tính của một người, bạn có thể phát triển các phép thử mức độ phù hợp khác nhau. Khi viết chương trình, bạn có thể sử dụng các biến boolean để đặt tên cho các phép thử đó, giúp tăng đáng kể khả năng đọc hiểu của mã nguồn:
+
+\begin{verbatim}
+boolean cute = (looks >= 9);
+boolean smart = (IQ > 125);
+boolean rich = (income > 100000);
+boolean available = (snothers == 0);
+boolean awesome = cute && smart && rich && available;
+\end{verbatim}
+
+Đôi khi bạn sẽ có dịp sử dụng một loại biến boolean đặc biệt gọi là cờ (flag). Thông thường, chúng ta sử dụng các cờ bên trong các vòng lặp (loops) để ghi lại các điều kiện lỗi hoặc để báo hiệu sự hoàn thành. Các cờ khác nhau sẽ kiểm tra các điều kiện khác nhau. Như một phép ẩn dụ, hãy tưởng tượng một trọng tài trong một trận đấu thể thao, người theo dõi một hành vi phạm luật cụ thể và ném một chiếc cờ nếu điều đó xảy ra. Thỉnh thoảng bạn sẽ nghe thấy phát thanh viên nói rằng, "Đã có cờ báo lỗi trên sân."
+
+Hãy đưa một chiếc cờ vào đoạn mã tính tổng tích lũy mà chúng ta đã thấy ở chương trước:
+
+\begin{verbatim}
+double sum = 0.0;
+for (int i = 1; i <= totalNumber; i++) {
+    System.out.print("    #" + i + "? ");
+    double next = console.nextDouble();
+    sum += next;
+}
+System.out.println("sum = " + sum);
+\end{verbatim}
+
+Giả sử chúng ta muốn biết liệu tổng số có bao giờ bị âm tại bất kỳ thời điểm nào hay không. Lưu ý rằng tình huống này không giống với tình huống tổng số cuối cùng nhận giá trị âm. Giống như số dư tài khoản ngân hàng, tổng số có thể chuyển đổi qua lại giữa dương và âm. Khi bạn thực hiện một chuỗi các giao dịch gửi và rút tiền, ngân hàng sẽ theo dõi xem bạn có từng rút quá số dư tài khoản của mình trong suốt quá trình đó hay không. Bằng cách sử dụng một cờ boolean, chúng ta có thể sửa đổi vòng lặp trước đó để theo dõi xem tổng số có bao giờ bị âm hay không và báo cáo kết quả sau vòng lặp:
+
+\begin{verbatim}
+double sum = 0.0;
+boolean negative = false;
+for (int i = 1; i <= totalNumber; i++) {
+    System.out.print("    #" + i + "? ");
+    double next = console.nextDouble();
+    sum += next;
+    if (sum < 0.0) {
+        negative = true;
+    }
+}
+System.out.println("sum = " + sum);
+if (negative) {
+    System.out.println("Sum went negative");
+} else {
+    System.out.println("Sum never went negative");
+}
+\end{verbatim}
+
+Lưu ý rằng câu lệnh if bên trong vòng lặp không có nhánh else vì bạn không muốn đặt cờ trở lại giá trị \texttt{false} sau khi đã phát hiện một giá trị âm.
+
+\subsection*{Thiền Boolean (Boolean Zen)}
+
+Vào năm 1974, Robert Pirsig đã khởi xướng một xu hướng văn hóa với cuốn sách \textit{Zen and the Art of Motorcycle Maintenance: An Inquiry into Values} (Thiền và Nghệ thuật Bảo trì Xe máy: Một cuộc Truy vấn về các Giá trị). Một loạt sách sau đó đã sao chép tiêu đề này với cấu trúc \textit{Zen and the Art of X} (Thiền và Nghệ thuật của X), trong đó X là Poker, Đan lát, Viết lách, Bi lắc, Đàn Guitar, Giảng dạy ở Trường công, Kiếm sống, Yêu đương, May vá, Hài độc thoại, Kỳ thi SAT, Cắm hoa, Buộc mồi câu, Phân tích Hệ thống, Làm cha, Viết kịch bản, Kiểm soát Bệnh tiểu đường, Sự thân mật, Giúp đỡ, Đánh nhau trên đường phố, Giết người, và vân vân. Thậm chí còn có một cuốn sách mang tên \textit{Zen and the Art of Anything} (Thiền và Nghệ thuật của Mọi thứ).
+
+Bây giờ chúng ta sẽ tham gia vào xu hướng văn hóa này bằng cách thảo luận về Thiền và nghệ thuật của kiểu dữ liệu \texttt{boolean}. Dường như nhiều người mới bắt đầu phải mất một thời gian để làm quen với các biểu thức Boolean. Những người mới bắt đầu thường viết các biểu thức quá phức tạp liên quan đến các giá trị boolean vì họ chưa nắm được sự đơn giản có thể đạt được khi bạn thực sự "hiểu" cách kiểu \texttt{boolean} hoạt động.
+
+Ví dụ, giả sử bạn đang viết một chương trình trò chơi liên quan đến các số có hai chữ số, trong đó mỗi số được cấu tạo từ hai chữ số khác nhau. Nói cách khác, chương trình sẽ sử dụng các số như 42 được cấu tạo từ hai chữ số riêng biệt, chứ không sử dụng các số như 6 (chỉ có một chữ số), 394 (nhiều hơn hai chữ số), hoặc 22 (cả hai chữ số giống nhau). Bạn có thể muốn kiểm tra xem một số cho trước có hợp lệ để sử dụng trong trò chơi hay không. Bạn có thể giới hạn phạm vi trong các số có hai chữ số bằng một phép thử như sau:
+
+\begin{verbatim}
+n >= 10 && n <= 99
+\end{verbatim}
+
+Bạn cũng phải kiểm tra để đảm bảo rằng hai chữ số đó không giống nhau. Bạn có thể lấy các chữ số của một số có hai chữ số bằng các biểu thức \texttt{n / 10} và \texttt{n \% 10}. Vì vậy, bạn có thể mở rộng phép thử để đảm bảo rằng các chữ số không giống nhau:
+
+\begin{verbatim}
+n >= 10 && n <= 99 && (n / 10 != n % 10)
+\end{verbatim}
+
+Phép thử này là một ví dụ điển hình cho tình huống mà bạn có thể sử dụng một phương thức (method) để bao bọc một biểu thức Boolean phức tạp. Việc trả về một giá trị boolean sẽ cho phép bạn gọi phương thức đó bao nhiêu lần tùy thích mà không cần phải sao chép biểu thức phức tạp này mỗi lần, và bạn có thể đặt tên cho phép toán này để giúp chương trình dễ đọc hơn.
+
+Giả sử bạn muốn gọi phương thức \texttt{isTwoUniqueDigits}. Bạn muốn phương thức này nhận một giá trị kiểu \texttt{int} và trả về \texttt{true} nếu số \texttt{int} đó được cấu tạo từ hai chữ số duy nhất và \texttt{false} nếu không phải. Do đó, phương thức sẽ trông như thế này:
+
+\begin{verbatim}
+public static boolean isTwoUniqueDigits(int n) {
+    ...
+}
+\end{verbatim}
+
+Bạn sẽ viết phần thân (body) của phương thức này như thế nào? Chúng ta đã viết xong phép thử, vì vậy chúng ta chỉ cần tìm cách tích hợp nó vào phương thức. Phương thức có kiểu trả về là boolean, nên bạn muốn nó trả về giá trị \texttt{true} khi phép thử thành công và giá trị \texttt{false} khi nó thất bại. Bạn có thể viết phương thức như sau:
+
+\begin{verbatim}
+public static boolean isTwoUniqueDigits(int n) {
+    if (n >= 10 && n <= 99 && (n % 10 != n / 10)) {
+        return true;
+    } else {
+        return false;
+    }
+}
+\end{verbatim}
+
+Phương thức này hoạt động tốt, nhưng nó dài dòng hơn mức cần thiết. Đoạn mã trên đánh giá phép thử mà chúng ta đã phát triển. Biểu thức đó có kiểu \texttt{boolean}, nghĩa là nó sẽ cho kết quả là \texttt{true} hoặc \texttt{false}. Câu lệnh if/else yêu cầu máy tính trả về \texttt{true} nếu biểu thức được đánh giá là \texttt{true} và trả về \texttt{false} nếu nó được đánh giá là \texttt{false}. Nhưng tại sao lại phải sử dụng cấu trúc này? Nếu phương thức sẽ trả về \texttt{true} khi biểu thức được đánh giá là \texttt{true} và trả về \texttt{false} khi nó được đánh giá là \texttt{false}, bạn có thể trả về trực tiếp giá trị của biểu thức đó luôn:
+
+\begin{verbatim}
+public static boolean isTwoUniqueDigits(int n) {
+    return (n >= 10 && n <= 99 && (n % 10 != n / 10));
+}
+\end{verbatim}
+
+Ngay cả phiên bản trước đó cũng có thể được đơn giản hóa, vì các dấu ngoặc đơn là không bắt buộc (mặc dù chúng giúp làm rõ chính xác những gì phương thức sẽ trả về). Đoạn mã này đánh giá phép thử mà chúng ta đã phát triển để xác định xem một số có được cấu tạo từ hai chữ số duy nhất hay không và trả về kết quả (\texttt{true} nếu đúng, \texttt{false} nếu sai).
+
+Hãy xem xét một phép ẩn dụ tương tự với các biểu thức số nguyên. Đối với một người hiểu rõ về Boolean Zen, phiên bản if/else của phương thức này trông cũng kỳ quặc như đoạn mã sau:
+
+\begin{verbatim}
+if (x == 1) {
+    return 1;
+} else if (x == 2) {
+    return 2;
+} else if (x == 3) {
+    return 3;
+} else if (x == 4) {
+    return 4;
+} else if (x == 5) {
+
+    return 5;
+}
+\end{verbatim}
+
+Nếu bạn luôn muốn trả về giá trị của \texttt{x}, bạn chỉ cần viết:
+
+\begin{verbatim}
+return x;
+\end{verbatim}
+
+Sự nhầm lẫn tương tự cũng có thể xảy ra khi sinh viên sử dụng các biến boolean. Trong phần trước, chúng ta đã xem xét một biến thể của thuật toán tính tổng tích lũy có sử dụng một biến boolean tên là \texttt{negative} để theo dõi xem liệu tổng số có bao giờ bị âm hay không. Sau đó, chúng ta đã sử dụng một câu lệnh if/else để in ra một thông báo báo cáo kết quả:
+
+\begin{verbatim}
+if (negative) {
+    System.out.println("Sum went negative");
+} else {
+    System.out.println("Sum never went negative");
+}
+\end{verbatim}
+
+Một số người mới bắt đầu sẽ viết đoạn mã này như sau:
+
+\begin{verbatim}
+if (negative == true) {
+
+    System.out.println("Sum went negative");
+} else {
+    System.out.println("Sum never went negative");
+}
+\end{verbatim}
+
+Phép so sánh này là không cần thiết vì câu lệnh if/else mong muốn một biểu thức kiểu \texttt{boolean} xuất hiện bên trong dấu ngoặc đơn. Một biến boolean đã thuộc kiểu dữ liệu phù hợp rồi, vì vậy chúng ta không cần phải kiểm tra xem nó có bằng \texttt{true} hay không; nó hoặc là \texttt{true} hoặc là không phải (trong trường hợp đó nó là \texttt{false}). Đối với một người hiểu rõ về Boolean Zen, phép thử trên có vẻ dư thừa giống như việc nói rằng:
+
+\begin{verbatim}
+if ((negative == true) == true) {
+    ...
+}
+\end{verbatim}
+
+Những người mới bắt đầu cũng thường viết các phép thử như sau:
+
+\begin{verbatim}
+if (negative == false) {
+    ...
+}
+\end{verbatim}

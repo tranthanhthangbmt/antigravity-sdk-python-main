@@ -44,10 +44,9 @@ function ChapterCard({ chapter, apiKey }) {
     if (apiKey) {
       url.searchParams.append('api_key', apiKey);
     }
-    const partsToSend = selectedParts.filter(id => {
-      const p = plan?.parts?.find(part => part.id === id);
-      return p && p.status !== 'completed';
-    });
+    // User explicitly checked these checkboxes, so we should send them to backend
+    // regardless of whether they are 'completed' or not. This allows re-translating or re-exporting PDFs.
+    const partsToSend = selectedParts;
 
     if (partsToSend.length === 0) {
       alert("Vui lòng chọn ít nhất 1 phần cần dịch!");

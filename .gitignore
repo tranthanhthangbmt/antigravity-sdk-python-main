@@ -1,0 +1,17 @@
+howToRun.txt
+__pycache__/
+*.pyc
+venv/
+env/
+.env
+node_modules/
+.DS_Store
+*.log
+*.pdf
+*.aux
+*.toc
+*.out
+*.log
+*.fls
+*.fdb_latexmk
+*.synctex.gz

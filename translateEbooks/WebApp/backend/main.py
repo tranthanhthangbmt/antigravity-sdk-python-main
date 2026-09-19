@@ -128,10 +128,7 @@ async def websocket_endpoint(websocket: WebSocket, chapter_id: str, api_key: str
             output_dir = r"D:\MY_CODE\Antigravity_SDK1\antigravity-sdk-python-main\translateEbooks\JavaProgrammingEbook\JavaProgramming_outputEbook"
             chapter_tex_path = os.path.join(output_dir, "chapters_tex", "chapter_05.tex")
             
-            # Reset the file if starting from scratch
-            if not selected_parts or 1 in selected_parts:
-                with open(chapter_tex_path, "w", encoding="utf-8") as f:
-                    f.write("\\chapter{Program Logic and Indefinite Loops}\n\n")
+            # Note: We no longer reset the single chapter_05.tex file here because we assemble it at the end.
             
             original_pdf_path = r"D:\MY_CODE\Antigravity_SDK1\antigravity-sdk-python-main\translateEbooks\JavaProgrammingEbook\JavaProgramming_chaptersPDF\Chapter_05.pdf"
             
@@ -142,6 +139,16 @@ async def websocket_endpoint(websocket: WebSocket, chapter_id: str, api_key: str
 
                 start_page = (i - 1) * 10
                 end_page = min(i * 10, 161)
+                
+                part_tex_path = os.path.join(output_dir, "chapters_tex", f"chapter_05_part_{i}.tex")
+                
+                # TRANSLATION STORE CHECK
+                if os.path.exists(part_tex_path):
+                    await websocket.send_text(json.dumps({"type": "status", "part": i, "status": "completed"}))
+                    await websocket.send_text(json.dumps({"type": "log", "message": f"[System] Phần {i} đã có sẵn trong Store. Lấy từ Store (không cần dịch lại)!"}))
+                    chapter_progress["chapter_05"].add(i)
+                    save_progress(chapter_progress)
+                    continue
                 
                 await websocket.send_text(json.dumps({"type": "status", "part": i, "status": "extracting"}))
                 await websocket.send_text(json.dumps({"type": "log", "message": f"[Agent] Đang trích xuất văn bản từ trang {start_page} đến {end_page} của file gốc..."}))
@@ -191,7 +198,7 @@ async def websocket_endpoint(websocket: WebSocket, chapter_id: str, api_key: str
                     if images_found:
                         meta_instruction = "\n[LƯU Ý CHO AI: TRÊN CÁC TRANG NÀY CÓ CHỨA CÁC HÌNH ẢNH SAU: "
                         meta_instruction += ", ".join(images_found)
-                        meta_instruction += ". HÃY TỰ ĐỘNG CHÈN LỆNH \\includegraphics{Pictures/tên_ảnh} VÀO VỊ TRÍ THÍCH HỢP TRONG BẢN DỊCH ĐỂ TRÌNH BÀY LẠI HÌNH ẢNH!]\n\n"
+                        meta_instruction += ". HÃY TỰ ĐỘNG CHÈN LỆNH \\includegraphics[max width=\\linewidth]{Pictures/tên_ảnh} VÀO VỊ TRÍ THÍCH HỢP TRONG BẢN DỊCH ĐỂ TRÌNH BÀY LẠI HÌNH ẢNH!]\n\n"
                         extracted_text = meta_instruction + extracted_text
                         
                 except Exception as e:
@@ -223,11 +230,11 @@ BẮT ĐẦU TRẢ VỀ MÃ LATEX NGAY LẬP TỨC CHO ĐOẠN VĂN BẢN SAU:
                 
                 try:
                     # Run generate_content via REST API directly using SSE streaming
-                    url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-pro:streamGenerateContent?alt=sse&key={api_key}"
+                    url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:streamGenerateContent?alt=sse&key={api_key}"
                     
                     payload = {
                         "system_instruction": {
-                            "parts": [{"text": "Bạn là một chuyên gia dịch thuật sách chuyên ngành Công Nghệ Thông Tin. Bạn CHỈ trả về mã LaTeX, tuyệt đối KHÔNG lặp lại chỉ dẫn và KHÔNG dùng định dạng Markdown."}]
+                            "parts": [{"text": "Bạn là chuyên gia dịch thuật sách CNTT sang tiếng Việt. Bạn CHỈ trả về mã LaTeX đã dịch. TUYỆT ĐỐI KHÔNG giải thích, KHÔNG thêm suy nghĩ (thought process), KHÔNG thêm bullet points, KHÔNG bọc trong markdown (```latex). Bắt đầu trả lời ngay lập tức bằng mã LaTeX."}]
                         },
                         "contents": [{"role": "user", "parts": [{"text": prompt}]}]
                     }
@@ -237,15 +244,25 @@ BẮT ĐẦU TRẢ VỀ MÃ LATEX NGAY LẬP TỨC CHO ĐOẠN VĂN BẢN SAU:
                     import queue
                     q = queue.Queue()
                     
+                    import time
                     def make_request():
-                        try:
-                            with urllib.request.urlopen(req) as response:
-                                for line in response:
-                                    q.put(("data", line.decode("utf-8")))
-                        except Exception as e:
-                            q.put(("error", e))
-                        finally:
-                            q.put(("done", None))
+                        max_retries = 3
+                        for attempt in range(max_retries):
+                            try:
+                                with urllib.request.urlopen(req) as response:
+                                    for line in response:
+                                        q.put(("data", line.decode("utf-8")))
+                                break # Success, break out of retry loop
+                            except urllib.error.HTTPError as e:
+                                if e.code in [503, 429] and attempt < max_retries - 1:
+                                    time.sleep(2 * (attempt + 1)) # Exponential backoff
+                                    continue
+                                q.put(("error", e))
+                                break
+                            except Exception as e:
+                                q.put(("error", e))
+                                break
+                        q.put(("done", None))
                             
                     asyncio.create_task(asyncio.to_thread(make_request))
                     
@@ -291,12 +308,10 @@ BẮT ĐẦU TRẢ VỀ MÃ LATEX NGAY LẬP TỨC CHO ĐOẠN VĂN BẢN SAU:
                     await websocket.send_text(json.dumps({"type": "log", "message": f"[Lỗi Dịch Gemini] {str(e)}"}))
                     continue
                 
-                # Append translated content for this chunk
-                with open(chapter_tex_path, "a", encoding="utf-8") as f:
-                    f.write(f"\n% --- Bắt đầu phần dịch trang {start_page} đến {end_page} ---\n")
-                    f.write(f"\\section{{Phần dịch trang {start_page} đến {end_page}}}\n") # Thêm section để mục lục đẹp
+                # Save translated content for this chunk into its OWN file (The Store)
+                with open(part_tex_path, "w", encoding="utf-8") as f:
+                    # Do not inject \section anymore to prevent breaking code blocks across pages
                     f.write(translated_tex.strip() + "\n")
-                    f.write(f"\n% --- Kết thúc phần dịch trang {start_page} đến {end_page} ---\n")
                 
                 chapter_progress["chapter_05"].add(i)
                 save_progress(chapter_progress)
@@ -306,9 +321,28 @@ BẮT ĐẦU TRẢ VỀ MÃ LATEX NGAY LẬP TỨC CHO ĐOẠN VĂN BẢN SAU:
             # Part 17: LaTeX Standalone
             if not selected_parts or 17 in selected_parts:
                 await websocket.send_text(json.dumps({"type": "status", "part": 17, "status": "extracting"}))
-                await websocket.send_text(json.dumps({"type": "log", "message": "[System] Generating chapter_05_standalone.tex..."}))
+                await websocket.send_text(json.dumps({"type": "log", "message": "[System] Stitching parts from Store and generating chapter_05_standalone.tex..."}))
                 
                 output_dir = r"D:\MY_CODE\Antigravity_SDK1\antigravity-sdk-python-main\translateEbooks\JavaProgrammingEbook\JavaProgramming_outputEbook"
+                
+                # Assemble chapter_05.tex from parts
+                assembled_content = "\\chapter{Program Logic and Indefinite Loops}\n\n"
+                for i in range(1, 17):
+                    part_file = os.path.join(output_dir, "chapters_tex", f"chapter_05_part_{i}.tex")
+                    if os.path.exists(part_file):
+                        with open(part_file, "r", encoding="utf-8") as pf:
+                            # Quick autofix for common chunk boundary issues
+                            chunk_text = pf.read()
+                            # Enforce max width on images for older chunks that didn't have the new prompt
+                            import re
+                            chunk_text = re.sub(r'\\includegraphics\{Pictures/', r'\\includegraphics[max width=\\linewidth]{Pictures/', chunk_text)
+                            
+                            assembled_content += chunk_text + "\n"
+                            
+                chapter_05_merged_path = os.path.join(output_dir, "chapters_tex", "chapter_05.tex")
+                with open(chapter_05_merged_path, "w", encoding="utf-8") as f:
+                    f.write(assembled_content)
+                    
                 main_tex_path = os.path.join(output_dir, "main.tex")
                 standalone_tex_path = os.path.join(output_dir, "chapter_05_standalone.tex")
                 
@@ -319,6 +353,9 @@ BẮT ĐẦU TRẢ VỀ MÃ LATEX NGAY LẬP TỨC CHO ĐOẠN VĂN BẢN SAU:
                 # Remove Title Page, Copyright, TOC (starts at \begingroup, ends at \pagestyle{fancy})
                 # We must retain \chapterimage to prevent 'File `' not found' error on \chapter
                 content = re.sub(r'\\begingroup.*?\\pagestyle\{fancy\}', r'\\chapterimage{chapter_head_1.pdf}', content, flags=re.DOTALL)
+                # Inject adjustbox for max width image support
+                content = content.replace(r'\usepackage{booktabs}', "\\usepackage{booktabs}\n\\usepackage[export]{adjustbox}")
+                
                 # Remove Bibliography and Index (starts at \chapter*{Bibliography})
                 content = re.sub(r'\\chapter\*\{Bibliography\}.*?(?=\\end\{document\})', '', content, flags=re.DOTALL)
                 

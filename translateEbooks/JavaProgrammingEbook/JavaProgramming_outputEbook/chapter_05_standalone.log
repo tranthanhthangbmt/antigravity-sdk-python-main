@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999997 (MiKTeX 25.12) (preloaded format=xelatex 2026.8.5)  14 SEP 2026 21:22
+This is XeTeX, Version 3.141592653-2.6-0.999997 (MiKTeX 25.12) (preloaded format=xelatex 2026.8.5)  19 SEP 2026 11:15
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1352,12 +1352,66 @@ Package: longtable 2025-10-13 v4.24 Multi-page Table package (DPC)
 \c@LT@chunks=\count521
 \LT@p@ftn=\toks50
 )
+(C:\Users\thanh\AppData\Local\Programs\MiKTeX\tex/latex/adjustbox\adjustbox.sty
+Package: adjustbox 2025/02/26 v1.3c Adjusting TeX boxes (trim, clip, ...)
+(C:\Users\thanh\AppData\Local\Programs\MiKTeX\tex/latex/xkeyval\xkeyval.sty
+Package: xkeyval 2022/06/16 v2.9 package option processing (HA)
+
+(C:\Users\thanh\AppData\Local\Programs\MiKTeX\tex/generic/xkeyval\xkeyval.tex
+(C:\Users\thanh\AppData\Local\Programs\MiKTeX\tex/generic/xkeyval\xkvutils.tex
+\XKV@toks=\toks51
+\XKV@tempa@toks=\toks52
+)
+\XKV@depth=\count522
+File: xkeyval.tex 2014/12/03 v2.7a key=value parser (HA)
+))
+(C:\Users\thanh\AppData\Local\Programs\MiKTeX\tex/latex/adjustbox\adjcalc.sty
+Package: adjcalc 2012/05/16 v1.1 Provides advanced setlength with multiple back
+-ends (calc, etex, pgfmath)
+)
+(C:\Users\thanh\AppData\Local\Programs\MiKTeX\tex/latex/adjustbox\trimclip.sty
+Package: trimclip 2025/02/21 v1.2a Trim and clip general TeX material
+
+(C:\Users\thanh\AppData\Local\Programs\MiKTeX\tex/latex/collectbox\collectbox.s
+ty
+Package: collectbox 2022/10/17 v0.4c Collect macro arguments as boxes
+\collectedbox=\box83
+)
+\tc@llx=\dimen305
+\tc@lly=\dimen306
+\tc@urx=\dimen307
+\tc@ury=\dimen308
+Package trimclip Info: Using driver 'tc-xetex.def'.
+
+(C:\Users\thanh\AppData\Local\Programs\MiKTeX\tex/latex/adjustbox\tc-xetex.def
+File: tc-xetex.def 2019/01/04 v2.2 Clipping driver for xetex
+))
+\adjbox@Width=\dimen309
+\adjbox@Height=\dimen310
+\adjbox@Depth=\dimen311
+\adjbox@Totalheight=\dimen312
+\adjbox@pwidth=\dimen313
+\adjbox@pheight=\dimen314
+\adjbox@pdepth=\dimen315
+\adjbox@ptotalheight=\dimen316
+
+(C:\Users\thanh\AppData\Local\Programs\MiKTeX\tex/latex/ifoddpage\ifoddpage.sty
+Package: ifoddpage 2022/10/18 v1.2 Conditionals for odd/even page detection
+\c@checkoddpage=\count523
+) (C:\Users\thanh\AppData\Local\Programs\MiKTeX\tex/latex/varwidth\varwidth.sty
+Package: varwidth 2009/03/30 ver 0.92;  Variable-width minipages
+\@vwid@box=\box84
+\sift@deathcycles=\count524
+\@vwid@loff=\dimen317
+\@vwid@roff=\dimen318
+)
+==> First Aid for varwidth.sty applied!
+)
 Package csquotes Info: Checking for multilingual support...
 Package csquotes Info: ... found 'babel' package.
 Package csquotes Info: Adjusting default style.
 Package csquotes Info: Redefining alias 'default' -> 'english'.
-
-(chapter_05_standalone.aux (chapters_tex/chapter_01.aux)
+ (chapter_05_standalone.aux (chapters_tex/chapter_01.aux)
 (chapters_tex/chapter_02.aux
 
 LaTeX Warning: Label `tuxf3m-tux1eaft-chux1b0ux1a1ng-chapter-summary' multiply 
@@ -1386,26 +1440,26 @@ efined.
 ) (chapters_tex/chapter_05.aux))
 \openout1 = `chapter_05_standalone.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 57.
-LaTeX Font Info:    ... okay on input line 57.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 57.
-LaTeX Font Info:    ... okay on input line 57.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 57.
-LaTeX Font Info:    ... okay on input line 57.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 57.
-LaTeX Font Info:    ... okay on input line 57.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 57.
-LaTeX Font Info:    ... okay on input line 57.
-LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 57.
-LaTeX Font Info:    ... okay on input line 57.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 57.
-LaTeX Font Info:    ... okay on input line 57.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 57.
-LaTeX Font Info:    ... okay on input line 57.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 57.
-LaTeX Font Info:    ... okay on input line 57.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 57.
-LaTeX Font Info:    ... okay on input line 57.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 58.
+LaTeX Font Info:    ... okay on input line 58.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 58.
+LaTeX Font Info:    ... okay on input line 58.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 58.
+LaTeX Font Info:    ... okay on input line 58.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 58.
+LaTeX Font Info:    ... okay on input line 58.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 58.
+LaTeX Font Info:    ... okay on input line 58.
+LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 58.
+LaTeX Font Info:    ... okay on input line 58.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 58.
+LaTeX Font Info:    ... okay on input line 58.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 58.
+LaTeX Font Info:    ... okay on input line 58.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 58.
+LaTeX Font Info:    ... okay on input line 58.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 58.
+LaTeX Font Info:    ... okay on input line 58.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: xetex
@@ -1441,7 +1495,7 @@ LaTeX Font Info:    ... okay on input line 57.
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-\c@lstlisting=\count522
+\c@lstlisting=\count525
 
 Package fontspec Info: 
 (fontspec)             Adjusting the maths setup (use [no-math] to avoid
@@ -1449,70 +1503,73 @@ Package fontspec Info:
 
 \symlegacymaths=\mathgroup6
 LaTeX Font Info:    Overwriting symbol font `legacymaths' in version `bold'
-(Font)                  OT1/cmr/m/n --> OT1/cmr/bx/n on input line 57.
-LaTeX Font Info:    Redeclaring math accent \acute on input line 57.
-LaTeX Font Info:    Redeclaring math accent \grave on input line 57.
-LaTeX Font Info:    Redeclaring math accent \ddot on input line 57.
-LaTeX Font Info:    Redeclaring math accent \tilde on input line 57.
-LaTeX Font Info:    Redeclaring math accent \bar on input line 57.
-LaTeX Font Info:    Redeclaring math accent \breve on input line 57.
-LaTeX Font Info:    Redeclaring math accent \check on input line 57.
-LaTeX Font Info:    Redeclaring math accent \hat on input line 57.
-LaTeX Font Info:    Redeclaring math accent \dot on input line 57.
-LaTeX Font Info:    Redeclaring math accent \mathring on input line 57.
-LaTeX Font Info:    Redeclaring math symbol \Gamma on input line 57.
-LaTeX Font Info:    Redeclaring math symbol \Delta on input line 57.
-LaTeX Font Info:    Redeclaring math symbol \Theta on input line 57.
-LaTeX Font Info:    Redeclaring math symbol \Lambda on input line 57.
-LaTeX Font Info:    Redeclaring math symbol \Xi on input line 57.
-LaTeX Font Info:    Redeclaring math symbol \Pi on input line 57.
-LaTeX Font Info:    Redeclaring math symbol \Sigma on input line 57.
-LaTeX Font Info:    Redeclaring math symbol \Upsilon on input line 57.
-LaTeX Font Info:    Redeclaring math symbol \Phi on input line 57.
-LaTeX Font Info:    Redeclaring math symbol \Psi on input line 57.
-LaTeX Font Info:    Redeclaring math symbol \Omega on input line 57.
-LaTeX Font Info:    Redeclaring math symbol \mathdollar on input line 57.
-LaTeX Font Info:    Redeclaring symbol font `operators' on input line 57.
+(Font)                  OT1/cmr/m/n --> OT1/cmr/bx/n on input line 58.
+LaTeX Font Info:    Redeclaring math accent \acute on input line 58.
+LaTeX Font Info:    Redeclaring math accent \grave on input line 58.
+LaTeX Font Info:    Redeclaring math accent \ddot on input line 58.
+LaTeX Font Info:    Redeclaring math accent \tilde on input line 58.
+LaTeX Font Info:    Redeclaring math accent \bar on input line 58.
+LaTeX Font Info:    Redeclaring math accent \breve on input line 58.
+LaTeX Font Info:    Redeclaring math accent \check on input line 58.
+LaTeX Font Info:    Redeclaring math accent \hat on input line 58.
+LaTeX Font Info:    Redeclaring math accent \dot on input line 58.
+LaTeX Font Info:    Redeclaring math accent \mathring on input line 58.
+LaTeX Font Info:    Redeclaring math symbol \Gamma on input line 58.
+LaTeX Font Info:    Redeclaring math symbol \Delta on input line 58.
+LaTeX Font Info:    Redeclaring math symbol \Theta on input line 58.
+LaTeX Font Info:    Redeclaring math symbol \Lambda on input line 58.
+LaTeX Font Info:    Redeclaring math symbol \Xi on input line 58.
+LaTeX Font Info:    Redeclaring math symbol \Pi on input line 58.
+LaTeX Font Info:    Redeclaring math symbol \Sigma on input line 58.
+LaTeX Font Info:    Redeclaring math symbol \Upsilon on input line 58.
+LaTeX Font Info:    Redeclaring math symbol \Phi on input line 58.
+LaTeX Font Info:    Redeclaring math symbol \Psi on input line 58.
+LaTeX Font Info:    Redeclaring math symbol \Omega on input line 58.
+LaTeX Font Info:    Redeclaring math symbol \mathdollar on input line 58.
+LaTeX Font Info:    Redeclaring symbol font `operators' on input line 58.
 LaTeX Font Info:    Encoding `OT1' has changed to `TU' for symbol font
-(Font)              `operators' in the math version `normal' on input line 57.
+(Font)              `operators' in the math version `normal' on input line 58.
 LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
 (Font)                  OT1/cmr/m/n --> TU/TimesNewRoman(0)/m/n on input line 5
-7.
+8.
 LaTeX Font Info:    Encoding `OT1' has changed to `TU' for symbol font
-(Font)              `operators' in the math version `bold' on input line 57.
+(Font)              `operators' in the math version `bold' on input line 58.
 LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
 (Font)                  OT1/cmr/bx/n --> TU/TimesNewRoman(0)/m/n on input line 
-57.
+58.
 LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
 (Font)                  TU/TimesNewRoman(0)/m/n --> TU/TimesNewRoman(0)/m/n on 
-input line 57.
+input line 58.
 LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `normal'
 (Font)                  OT1/cmr/m/it --> TU/TimesNewRoman(0)/m/it on input line
- 57.
+ 58.
 LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `normal'
 (Font)                  OT1/cmr/bx/n --> TU/TimesNewRoman(0)/b/n on input line 
-57.
+58.
 LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `normal'
-(Font)                  OT1/cmss/m/n --> TU/Arial(0)/m/n on input line 57.
+(Font)                  OT1/cmss/m/n --> TU/Arial(0)/m/n on input line 58.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `normal'
-(Font)                  OT1/cmtt/m/n --> TU/lmtt/m/n on input line 57.
+(Font)                  OT1/cmtt/m/n --> TU/lmtt/m/n on input line 58.
 LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
 (Font)                  TU/TimesNewRoman(0)/m/n --> TU/TimesNewRoman(0)/b/n on 
-input line 57.
+input line 58.
 LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `bold'
 (Font)                  OT1/cmr/bx/it --> TU/TimesNewRoman(0)/b/it on input lin
-e 57.
+e 58.
 LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
-(Font)                  OT1/cmss/bx/n --> TU/Arial(0)/b/n on input line 57.
+(Font)                  OT1/cmss/bx/n --> TU/Arial(0)/b/n on input line 58.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
-(Font)                  OT1/cmtt/m/n --> TU/lmtt/b/n on input line 57.
-LaTeX Info: Redefining \microtypecontext on input line 57.
-Package microtype Info: Applying patch `item' on input line 57.
-Package microtype Info: Applying patch `toc' on input line 57.
-Package microtype Info: Applying patch `eqnum' on input line 57.
-Package microtype Info: Applying patch `footnote' on input line 57.
-Package microtype Info: Applying patch `verbatim' on input line 57.
-LaTeX Info: Redefining \microtypesetup on input line 57.
+(Font)                  OT1/cmtt/m/n --> TU/lmtt/b/n on input line 58.
+Package microtype Info: Patching varwidth to enable character protrusion.
+\MT@vwid@leftmargin=\dimen319
+\MT@vwid@rightmargin=\dimen320
+LaTeX Info: Redefining \microtypecontext on input line 58.
+Package microtype Info: Applying patch `item' on input line 58.
+Package microtype Info: Applying patch `toc' on input line 58.
+Package microtype Info: Applying patch `eqnum' on input line 58.
+Package microtype Info: Applying patch `footnote' on input line 58.
+Package microtype Info: Applying patch `verbatim' on input line 58.
+LaTeX Info: Redefining \microtypesetup on input line 58.
 Package microtype Info: Character protrusion enabled (level 2).
 Package microtype Info: Using default protrusion set `alltext'.
 Package microtype Info: No adjustment of tracking.
@@ -1539,10 +1596,10 @@ Package biblatex Info: Trying to load bibliographic data...
 Package biblatex Info: ... file 'chapter_05_standalone.bbl' not found.
 
 No file chapter_05_standalone.bbl.
-Package biblatex Info: Reference section=0 on input line 57.
-Package biblatex Info: Reference segment=0 on input line 57.
-Package hyperref Info: Link coloring OFF on input line 57.
-\c@ttl@toc@default=\count523
+Package biblatex Info: Reference section=0 on input line 58.
+Package biblatex Info: Reference segment=0 on input line 58.
+Package hyperref Info: Link coloring OFF on input line 58.
+\c@ttl@toc@default=\count526
 Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             `Arial' (encoding: TU).
 (microtype)             For optimal results, create family-specific settings.
@@ -1564,22 +1621,60 @@ Package microtype Info: Loading generic protrusion settings for font family
 Chương 5.
 File: Pictures/chapter_head_1.pdf Graphic file (type pdf)
 <use Pictures/chapter_head_1.pdf>
+[219]
 Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             `lmtt' (encoding: TU).
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
 File: Pictures/ch05_p4_img0.png Graphic file (type bmp)
 <Pictures/ch05_p4_img0.png>
-)
-Overfull \hbox (147.21889pt too wide) in paragraph at lines 15--76
+
+Overfull \hbox (17.00108pt too wide) in paragraph at lines 73--76
 [][] 
  []
 
 
-Underfull \vbox (badness 10000) has occurred while \output is active []
+Underfull \vbox (badness 3078) has occurred while \output is active []
 
- [219]
-[220]
+ [220]
+[221] [222] [223]
+LaTeX Font Info:    Trying to load font information for U+msa on input line 218
+.
+
+(C:\Users\thanh\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsa.fd
+File: umsa.fd 2013/01/14 v3.01 AMS symbols A
+)
+(C:\Users\thanh\AppData\Local\Programs\MiKTeX\tex/latex/microtype\mt-msa.cfg
+File: mt-msa.cfg 2006/02/04 v1.1 microtype config. file: AMS symbols (a) (RS)
+)
+LaTeX Font Info:    Trying to load font information for U+msb on input line 218
+.
+
+(C:\Users\thanh\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsb.fd
+File: umsb.fd 2013/01/14 v3.01 AMS symbols B
+)
+(C:\Users\thanh\AppData\Local\Programs\MiKTeX\tex/latex/microtype\mt-msb.cfg
+File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
+)
+(C:\Users\thanh\AppData\Local\Programs\MiKTeX\tex/latex/microtype\mt-cmr.cfg
+File: mt-cmr.cfg 2013/05/19 v2.2 microtype config. file: Computer Modern Roman 
+(RS)
+)
+[224]
+Overfull \hbox (10.11356pt too wide) in paragraph at lines 305--305
+[]\TU/lmtt/m/n/10.95 17         int result = -1; // đặt thành -1 để đảm bảo chú
+ng ta vào vòng lặp[] 
+ []
+
+[225] [226] [227] [228]
+File: Pictures/ch05_p25_img0.png Graphic file (type bmp)
+<Pictures/ch05_p25_img0.png>
+ [229] [230] [231] [232] [233] [234] [235]
+LaTeX Font Info:    Font shape `TU/lmtt/bx/n' in size <10.95> not available
+(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 808.
+ [236]
+[237] [238] [239] [240] [241] [242] [243] [244] [245] [246] [247] [248])
+[249]
 \tf@ptc=\write6
 \openout6 = `chapter_05_standalone.ptc'.
 
@@ -1599,12 +1694,12 @@ Package logreq Info: Writing requests to 'chapter_05_standalone.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 37339 strings out of 402986
- 741524 string characters out of 5448504
- 1788571 words of memory out of 5000000
- 65539 multiletter control sequences out of 15000+600000
- 628369 words of font info for 77 fonts, out of 8000000 for 9000
+ 38650 strings out of 402986
+ 764818 string characters out of 5448504
+ 1822419 words of memory out of 5000000
+ 66785 multiletter control sequences out of 15000+600000
+ 633081 words of font info for 103 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 89i,12n,107p,1020b,4162s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 89i,12n,107p,1020b,4455s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on chapter_05_standalone.pdf (5 pages).
+Output written on chapter_05_standalone.pdf (34 pages).

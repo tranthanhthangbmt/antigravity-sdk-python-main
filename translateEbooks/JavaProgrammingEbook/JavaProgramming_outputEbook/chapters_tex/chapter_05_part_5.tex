@@ -1,0 +1,157 @@
+\section{Phần dịch trang 40 đến 50}
+yêu cầu nhập và đọc một giá trị vào n.
+
+
+Đoạn mã giả (pseudocode) này được chuyển đổi khá dễ dàng sang mã Java như sau:
+
+\begin{verbatim}
+Scanner console = new Scanner(System.in);
+int sum = 0;
+System.out.print("next integer (–1 to quit)? ");
+int number = console.nextInt();
+while (number != –1) {
+    sum += number;
+    System.out.print("next integer (–1 to quit)? ");
+    number = console.nextInt();
+}
+System.out.println("sum = " + sum);
+\end{verbatim}
+
+
+Khi đoạn mã trên được thực thi, quá trình tương tác có thể trông như thế này:
+
+\begin{verbatim}
+next integer (–1 to quit)? 10 
+next integer (–1 to quit)? 20 
+next integer (–1 to quit)? 30 
+next integer (–1 to quit)? 40 
+next integer (–1 to quit)? 50 
+\end{verbatim}
+
+next integer (–1 to quit)? 60 
+next integer (–1 to quit)? –1 
+sum = 210 
+
+
+Một số học sinh nhận thấy rằng chương trình sẽ hoạt động tương tự nếu thay vì có một câu lệnh nhắc và đọc trước khi vòng lặp (loop) bắt đầu, chúng ta lại khởi tạo biến \texttt{number} bằng 0. Điều đó đúng trong trường hợp đặc biệt này, nhưng nó không mang tính tổng quát. Ví dụ, nếu bạn muốn tính giá trị lớn nhất (maximum) hoặc nhỏ nhất (minimum), bạn sẽ không muốn đưa số 0 vào làm một giá trị để xem xét. Vì vậy, mặc dù đoạn mã cụ thể này có thể được đơn giản hóa, chúng tôi vẫn muốn trình bày một giải pháp hoạt động hiệu quả cho tất cả các tác vụ tích lũy (cumulative tasks).
+
+\subsection*{5.3 Kiểu boolean (The boolean Type)}
+
+George Boole là một nhà logic học xuất sắc đến nỗi Java đã đặt tên một kiểu dữ liệu theo tên ông. Kiểu dữ liệu \texttt{boolean} trong Java được sử dụng để mô tả các mối quan hệ logic đúng/sai (true/false). Hãy nhớ lại rằng \texttt{boolean} là một trong các kiểu dữ liệu nguyên thủy (primitive types), giống như \texttt{int}, \texttt{double}, và \texttt{char}.
+
+Những người mới bắt đầu thường thắc mắc tại sao các nhà khoa học máy tính lại quan tâm đến logic nhiều đến vậy. Câu trả lời là logic là nền tảng của ngành máy tính giống như vật lý là nền tảng của ngành kỹ thuật. Các kỹ sư học vật lý vì họ muốn chế tạo các vật thể trong thế giới thực vốn bị chi phối bởi các định luật vật lý. Nếu bạn không hiểu vật lý, bạn có khả năng sẽ xây dựng một cây cầu bị sập. Các nhà khoa học máy tính cũng xây dựng các sản phẩm, nhưng trong một thế giới ảo bị chi phối bởi các định luật logic. Nếu bạn không hiểu logic, bạn có khả năng sẽ viết ra các chương trình máy tính bị đổ vỡ.
+
+Mà không hề nhận ra, bạn đã sử dụng các giá trị boolean rồi. Tất cả các cấu trúc điều khiển mà chúng ta đã xem xét—câu lệnh \texttt{if/else}, vòng lặp \texttt{for} (for loops), và vòng lặp \texttt{while} (while loops)—đều được điều khiển bởi các biểu thức xác định các điều kiện kiểm tra. Ví dụ, biểu thức
+\begin{verbatim}
+number % 2 == 0
+\end{verbatim}
+
+là một phép kiểm tra tính chia hết cho 2. Nó cũng là một biểu thức Boolean. Các biểu thức Boolean được thiết kế để nắm bắt các khái niệm về tính đúng và sai, vì vậy không có gì ngạc nhiên khi miền giá trị của kiểu \texttt{boolean} chỉ có hai giá trị: \texttt{true} (đúng) và \texttt{false} (sai). Các từ \texttt{true} và \texttt{false} là các từ khóa dành riêng (reserved words) trong Java. Chúng là các giá trị hằng (literals) của kiểu \texttt{boolean}. Tất cả các biểu thức Boolean, khi được đánh giá, sẽ trả về một trong hai giá trị hằng này. Đừng nhầm lẫn các giá trị đặc biệt này với các hằng chuỗi (string literals) \texttt{"true"} và \texttt{"false"}. Bạn không cần dấu ngoặc kép để tham chiếu đến các hằng Boolean.
+
+Khi bạn viết một chương trình xử lý các giá trị số, bạn thường muốn tính toán một giá trị và lưu trữ nó vào một biến hoặc viết một phương thức (method) để thể hiện một công thức phức tạp nào đó. Chúng ta cũng làm điều tương tự với kiểu \texttt{boolean}. Chúng ta có thể muốn ghi lại một giá trị Boolean vào một biến và chúng ta thường viết các phương thức trả về kết quả Boolean. Ví dụ, chúng ta đã thấy lớp \texttt{String} có các phương thức trả về kết quả Boolean, bao gồm \texttt{startsWith}, \texttt{endsWith}, \texttt{equals}, và \texttt{equalsIgnoreCase}.
+
+Để hiểu rõ hơn về điều này, hãy nhớ lại ý nghĩa của các thuật ngữ này đối với kiểu \texttt{int}. Các hằng (literals) của kiểu \texttt{int} bao gồm \texttt{0}, \texttt{1}, \texttt{2}, v.v. Bởi vì đây là các hằng của kiểu \texttt{int}, bạn có thể viết các biểu thức như sau với chúng:
+\begin{verbatim}
+int number1 = 1;
+int number2 = 0;
+\end{verbatim}
+
+
+Hãy xem xét những gì bạn có thể làm với các biến kiểu \texttt{boolean}. Giả sử bạn định nghĩa hai biến \texttt{boolean}, \texttt{test1} và \texttt{test2}. Các biến này chỉ có thể nhận hai giá trị khả dĩ: \texttt{true} và \texttt{false}. Bạn có thể viết:
+\begin{verbatim}
+boolean test1 = true;
+boolean test2 = false;
+\end{verbatim}
+
+
+Bạn cũng có thể viết một câu lệnh sao chép giá trị của một biến \texttt{boolean} này sang một biến khác, giống như với các biến thuộc bất kỳ kiểu dữ liệu nào khác:
+\begin{verbatim}
+test1 = test2;
+\end{verbatim}
+
+
+Hơn nữa, bạn biết rằng câu lệnh gán có thể sử dụng các biểu thức như:
+\begin{verbatim}
+number1 = 2 + 2;
+\end{verbatim}
+
+và rằng các phép kiểm tra đơn giản mà bạn đã và đang sử dụng là các biểu thức Boolean. Điều đó có nghĩa là bạn có thể viết các câu lệnh như sau:
+\begin{verbatim}
+test1 = (2 + 2 == 4);
+test2 = (3 * 100 < 250);
+\end{verbatim}
+
+
+Các câu lệnh gán này, về mặt hiệu quả, có nghĩa là "Hãy đặt biến boolean này theo giá trị chân trị được trả về bởi phép kiểm tra sau." Câu lệnh đầu tiên đặt biến \texttt{test1} thành \texttt{true}, vì phép kiểm tra được đánh giá là đúng (\texttt{true}). Câu lệnh thứ hai đặt biến \texttt{test2} thành \texttt{false}, vì phép kiểm tra thứ hai được đánh giá là sai (\texttt{false}). Bạn không cần phải đưa vào các dấu ngoặc đơn, nhưng chúng làm cho các câu lệnh dễ đọc hơn. Rõ ràng, phép gán là một trong những thao tác bạn có thể thực hiện trên các biến kiểu \texttt{boolean}.
+
+\subsection*{Toán tử logic (Logical Operators)}
+
+Trong Java, bạn có thể tạo ra các biểu thức Boolean phức tạp bằng cách sử dụng các toán tử logic (logical operators), được hiển thị trong Bảng 5.3.
+
+\noindent \textbf{Bảng 5.3: Các toán tử logic}
+
+Toán tử phủ định NOT (\texttt{!}) đảo ngược giá trị chân trị của toán hạng của nó. Nếu một biểu thức có giá trị là \texttt{true}, phép phủ định của nó sẽ có giá trị là \texttt{false}, và ngược lại. Bạn có thể biểu diễn mối quan hệ này trong một bảng chân trị (truth table). Bảng chân trị sau đây có hai cột, một cột dành cho biến và một cột dành cho phủ định của nó. Đối với mỗi giá trị của biến, bảng hiển thị giá trị tương ứng của phép phủ định.
+
+\noindent \textbf{Bảng chân trị cho phép phủ định NOT (\texttt{!})}
+
+Ngoài toán tử phủ định, có hai phép liên kết logic mà bạn sẽ sử dụng là AND (\texttt{\&\&}) và OR (\texttt{||}). Bạn sử dụng các liên kết này để ràng buộc hai biểu thức Boolean lại với nhau, tạo ra một biểu thức Boolean mới. Bảng chân trị sau đây cho thấy toán tử AND chỉ được đánh giá là \texttt{true} khi cả hai toán hạng riêng lẻ của nó đều là \texttt{true}.
+
+\noindent \textbf{Bảng chân trị cho phép AND (\texttt{\&\&})}
+
+Bảng chân trị sau đây cho thấy toán tử OR được đánh giá là \texttt{true} ngoại trừ khi cả hai toán hạng đều là \texttt{false}.
+
+\noindent \textbf{Bảng chân trị cho phép OR (\texttt{||})}
+
+Toán tử OR trong Java có ý nghĩa hơi khác một chút so với từ "or" (hoặc) trong tiếng Anh thông thường. Trong tiếng Anh, bạn nói: "Tối nay tôi sẽ học bài hoặc tôi sẽ đi xem phim." Một trong hai điều sẽ đúng, nhưng không phải cả hai. Toán tử OR giống với cụm từ "và/hoặc" (and/or) hơn: Nếu một hoặc cả hai toán hạng là \texttt{true}, thì toàn bộ mệnh đề là \texttt{true}.
+
+Bạn thường sử dụng các toán tử logic khi những gì bạn cần biểu diễn không thể rút gọn thành một phép kiểm tra đơn lẻ. Ví dụ, như chúng ta đã thấy ở chương trước, nếu bạn muốn thực hiện một thao tác cụ thể khi một số nằm trong khoảng từ 1 đến 10, bạn có thể viết:
+\begin{verbatim}
+if (number >= 1) {
+    if (number <= 10) {
+        doSomething();
+    }
+\end{verbatim}
+
+
+Nhưng bạn có thể diễn đạt điều này dễ dàng hơn bằng cách sử dụng toán tử logic AND:
+\begin{verbatim}
+if (number >= 1 && number <= 10) {
+    doSomething();
+\end{verbatim}
+
+
+Mọi người sử dụng các từ "và" và "hoặc" mọi lúc, nhưng Java chỉ cho phép bạn sử dụng chúng theo nghĩa logic chặt chẽ. Hãy cẩn thận để không viết mã như sau:
+\begin{verbatim}
+// đoạn mã này không biên dịch được
+if (x == 1 || 2 || 3) {
+    doSomething();
+\end{verbatim}
+
+
+Trong tiếng Anh thông thường, chúng ta sẽ đọc câu này là "x bằng 1 hoặc 2 hoặc 3", điều này có lý với chúng ta, nhưng lại không có nghĩa đối với Java. Bạn cũng có thể bị cám dỗ viết đoạn mã như sau:
+\begin{verbatim}
+// đoạn mã này không biên dịch được
+if (1 <= x <= 10) {
+    doSomethingElse();
+\end{verbatim}
+
+
+Trong toán học, biểu thức này sẽ có nghĩa và sẽ kiểm tra xem \texttt{x} có nằm trong khoảng từ 1 đến 10 (bao gồm cả hai đầu mút) hay không. Tuy nhiên, biểu thức này không có nghĩa trong Java.
+
+Bạn chỉ có thể sử dụng các toán tử logic AND và OR để kết hợp một chuỗi các biểu thức Boolean. Nếu không, máy tính sẽ không hiểu ý bạn muốn diễn đạt. Để biểu diễn ý tưởng "1 hoặc 2 hoặc 3", hãy kết hợp ba biểu thức Boolean khác nhau bằng các toán tử logic OR:
+\begin{verbatim}
+if (x == 1 || x == 2 || x == 3) {
+    doSomething();
+\end{verbatim}
+
+
+Để biểu diễn ý tưởng "nằm trong khoảng từ 1 đến 10 bao gồm cả hai đầu mút", hãy kết hợp hai biểu thức Boolean bằng một toán tử logic AND:
+\begin{verbatim}
+if (1 <= x && x <= 10) {
+    doSomethingElse();
+\end{verbatim}
+
+
+Bây giờ chúng ta đã tìm hiểu về các toán tử logic AND, OR, và NOT, đã đến lúc xem xét lại bảng thứ tự ưu tiên (precedence table) của chúng ta. Toán tử NOT xuất hiện ở trên cùng, với mức độ ưu tiên cao nhất. Hai toán tử logic còn lại có mức độ ưu tiên khá thấp, thấp hơn các toán tử số học và quan hệ nhưng cao hơn các toán tử gán. Toán tử AND có mức độ ưu tiên cao hơn một chút so với toán tử OR. Bảng 5.4 bao gồm các toán tử mới này.
+
+\noindent \textbf{Bảng 5.4: Thứ tự ưu tiên của toán tử trong Java}

@@ -1,0 +1,182 @@
+\section{Phần dịch trang 10 đến 20}
+\begin{verbatim}
+    System.out.println(number / 2);
+}
+\end{verbatim}
+
+Vấn đề với đoạn mã trước đó là biến \texttt{number} cần phải nằm trong phạm vi hiệu lực (scope) trong quá trình kiểm tra điều kiện của vòng lặp (loop), vì vậy nó không thể được khai báo bên trong vòng lặp. Một nỗ lực không chính xác để khắc phục lỗi biên dịch này là cắt và dán dòng khởi tạo \texttt{number} ra bên ngoài vòng lặp:
+
+\begin{verbatim}
+// đoạn mã này có một vòng lặp vô hạn
+int number = console.nextInt(); // được di chuyển ra ngoài vòng lặp 
+ 
+while (number > 0) {
+    System.out.println(number / 2);
+}
+\end{verbatim}
+
+Phiên bản này của đoạn mã có một vòng lặp vô hạn (infinite loop); nếu vòng lặp được bắt đầu, nó sẽ không bao giờ kết thúc. Vấn đề này phát sinh vì không có câu lệnh cập nhật nào bên trong thân vòng lặp \texttt{while} để thay đổi giá trị của \texttt{number}. Nếu \texttt{number} lớn hơn 0, vòng lặp sẽ liên tục in ra giá trị của nó và kiểm tra điều kiện vòng lặp, và điều kiện đó sẽ luôn trả về kết quả là \texttt{true}.
+
+Phiên bản dưới đây của đoạn mã sẽ giải quyết vấn đề vòng lặp vô hạn. Vòng lặp chứa một bước cập nhật trong mỗi lần lặp để chia đôi số nguyên và lưu trữ giá trị mới của nó. Nếu số nguyên chưa đạt đến giá trị 0, vòng lặp sẽ tiếp tục:
+
+\begin{verbatim}
+// đoạn mã này hoạt động chính xác
+int number = console.nextInt(); // được di chuyển ra ngoài vòng lặp
+while (number > 0) {
+    number = number / 2; // bước cập nhật: chia đôi
+    System.out.println(number);
+}
+\end{verbatim}
+
+Ý tưởng cốt lõi là thân của mỗi vòng lặp \texttt{while} đều nên chứa đoạn mã để cập nhật các số hạng được kiểm tra trong điều kiện vòng lặp. Nếu điều kiện vòng lặp \texttt{while} kiểm tra giá trị của một biến, thân vòng lặp nên gán lại một giá trị mới có ý nghĩa cho biến đó.
+
+\subsection*{Số ngẫu nhiên (Random Numbers)}
+
+Chúng ta thường muốn các chương trình của mình thể hiện các hành vi có vẻ ngẫu nhiên. Ví dụ, chúng ta muốn các chương trình trò chơi tạo ra một con số để người dùng đoán, xáo trộn một bộ bài, chọn một từ trong danh sách để người dùng đoán, v.v. Bản chất của các chương trình máy tính là có thể dự đoán được và không ngẫu nhiên. Nhưng chúng ta có thể tạo ra các giá trị có vẻ như ngẫu nhiên. Những giá trị như vậy được gọi là giả ngẫu nhiên (pseudorandom) vì chúng được tạo ra bằng thuật toán.
+
+\textbf{Số giả ngẫu nhiên (Pseudorandom Numbers)}
+\begin{quote}
+Những con số mà mặc dù được bắt nguồn từ các thuật toán có thể dự đoán trước và được xác định rõ ràng, nhưng lại mô phỏng các đặc tính của các con số được chọn một cách ngẫu nhiên.
+\end{quote}
+
+Java cung cấp một vài cơ chế để có được các số giả ngẫu nhiên. Một lựa chọn là gọi phương thức \texttt{random} từ lớp \texttt{Math} để lấy một giá trị ngẫu nhiên kiểu \texttt{double} có thuộc tính sau:
+\[
+0.0 \le \text{Math.random()} < 1.0
+\]
+Phương thức này cung cấp một cách nhanh chóng và dễ dàng để có được một số ngẫu nhiên, và bạn có thể sử dụng phép nhân để thay đổi phạm vi của các số mà phương thức tạo ra. Java cũng cung cấp một lớp gọi là \texttt{Random} giúp sử dụng dễ dàng hơn. Nó được bao gồm trong gói \texttt{java.util}, vì vậy bạn phải khai báo \texttt{import} ở đầu chương trình để sử dụng nó.
+
+Các đối tượng \texttt{Random} có một vài phương thức hữu ích liên quan đến việc tạo số giả ngẫu nhiên, được liệt kê trong Bảng 5.2. Mỗi khi bạn gọi một trong những phương thức này, Java sẽ tạo và trả về một số ngẫu nhiên mới thuộc kiểu dữ liệu được yêu cầu.
+
+\textbf{Bảng 5.2 Các phương thức hữu ích của đối tượng Random}
+
+Để tạo các số ngẫu nhiên, trước tiên bạn cần xây dựng một đối tượng \texttt{Random}:
+\begin{verbatim}
+Random r = new Random();
+\end{verbatim}
+Sau đó, bạn có thể gọi phương thức \texttt{nextInt} của nó, truyền vào một số nguyên tối đa. Con số trả về sẽ nằm trong khoảng từ 0 (bao gồm) đến giá trị tối đa đó (không bao gồm). Ví dụ: nếu bạn gọi \texttt{nextInt(100)}, bạn sẽ nhận được một số từ 0 đến 99. Bạn có thể cộng thêm 1 vào số đó để có được phạm vi từ 1 đến 100.
+
+Tương tác JShell sau đây tạo ra một đối tượng \texttt{Random} và sử dụng nó để tạo ra một vài số ngẫu nhiên từ 1 đến 10. Lưu ý rằng mỗi lần gọi \texttt{nextInt} đều tạo ra một số nguyên ngẫu nhiên mới:
+\begin{verbatim}
+jshell> Random r = new Random();
+r ==> java.util.Random@5c7fa833 
+ 
+jshell> r.nextInt(10)
+$2 ==> 2 
+ 
+jshell> r.nextInt(10)
+$3 ==> 9 
+ 
+jshell> r.nextInt(10)
+$4 ==> 9 
+ 
+jshell> r.nextInt(10)
+$5 ==> 0 
+ 
+jshell> r.nextInt(10)
+$6 ==> 5
+\end{verbatim}
+
+Hãy cùng xem một chương trình đơn giản chọn các số từ 1 đến 10 cho đến khi một số cụ thể xuất hiện. Chúng ta sẽ sử dụng một đối tượng \texttt{Random} để tạo ra các số giả ngẫu nhiên.
+
+Vòng lặp của chúng ta sẽ trông giống như thế này (trong đó \texttt{number} là giá trị mà người dùng yêu cầu chúng ta tạo ra):
+\begin{verbatim}
+int result;
+while (result != number) {
+    result = r.nextInt(10) + 1; // số ngẫu nhiên từ 1-10
+
+    System.out.println("next number = " + result);
+}
+\end{verbatim}
+
+Lưu ý rằng chúng ta phải khai báo biến \texttt{result} bên ngoài vòng lặp \texttt{while}, bởi vì \texttt{result} xuất hiện trong phần kiểm tra điều kiện của vòng lặp \texttt{while}. Đoạn mã trên có hướng tiếp cận đúng, nhưng Java sẽ không chấp nhận nó. Đoạn mã sẽ tạo ra một thông báo lỗi rằng biến \texttt{result} có thể chưa được khởi tạo. Đây là một ví dụ về một vòng lặp cần được mồi (priming).
+
+\textbf{Mồi vòng lặp (Priming a Loop)}
+\begin{quote}
+Khởi tạo các biến trước một vòng lặp để "mồi bơm" và đảm bảo rằng vòng lặp sẽ được thực thi.
+\end{quote}
+
+Chúng ta muốn đặt biến \texttt{result} thành một giá trị nào đó để khiến vòng lặp được thực thi, nhưng giá trị cụ thể không quan trọng miễn là nó đưa chúng ta vào được trong vòng lặp. Tuy nhiên, chúng ta cần cẩn thận không đặt nó thành giá trị mà người dùng muốn chúng ta tạo ra. Trong chương trình này, chúng ta đang làm việc với các giá trị từ 1 đến 10, vì vậy chúng ta có thể đặt \texttt{result} thành một giá trị như -1 vốn rõ ràng nằm ngoài phạm vi số này. Đôi khi chúng ta gọi đây là một giá trị "giả" (dummy value) vì chúng ta không thực sự xử lý nó. Ở phần sau của chương trình này, chúng ta sẽ thấy một biến thể của vòng lặp \texttt{while} không yêu cầu kiểu mồi này.
+
+Dưới đây là giải pháp chương trình hoàn chỉnh:
+\begin{verbatim}
+ 1 // Chọn các số ngẫu nhiên từ 1-10 cho đến khi chọn được giá trị đã cho.
+ 2 import java.util.*;
+ 3 
+ 4 public class Pick {
+ 5     public static void main(String[] args) {
+ 6         System.out.println("This program picks numbers from");
+ 7         System.out.println("1 to 10 until a particular");
+ 8         System.out.println("number comes up.");
+ 9         System.out.println();
+10
+11         Scanner console = new Scanner(System.in);
+12         Random r = new Random();
+13
+14         System.out.print("Pick a number between 1 and 10--> ");
+15         int number = console.nextInt();
+16
+17         int result = -1; // đặt thành -1 để đảm bảo chúng ta vào vòng lặp
+18         int count = 0;
+19         while (result != number) {
+20             result = r.nextInt(10) + 1; // số ngẫu nhiên từ 1-10
+
+21             System.out.println("next number = " + result);
+22             count++;
+23         }
+24         System.out.println("Your number came up after " +
+25                            count + " times");
+26     }
+27 }
+\end{verbatim}
+
+Tùy thuộc vào chuỗi số được trả về bởi đối tượng \texttt{Random}, chương trình có thể kết thúc việc chọn số đã cho một cách nhanh chóng, như trong kết quả chạy mẫu sau:
+\begin{verbatim}
+This program picks numbers from 
+1 to 10 until a particular 
+number comes up. 
+ 
+Pick a number between 1 and 10--> 2 
+next number = 7 
+next number = 8 
+next number = 2 
+Your number came up after 3 times
+\end{verbatim}
+
+Cũng có khả năng chương trình sẽ mất một khoảng thời gian để chọn được số đó, như trong kết quả chạy mẫu dưới đây:
+\begin{verbatim}
+This program picks numbers from 
+1 to 10 until a particular 
+number comes up. 
+ 
+Pick a number between 1 and 10--> 10 
+next number = 9 
+next number = 7 
+next number = 7 
+next number = 5 
+next number = 8 
+next number = 8 
+next number = 1 
+next number = 5 
+next number = 1 
+next number = 9 
+next number = 7 
+next number = 10 
+Your number came up after 12 times
+\end{verbatim}
+
+\subsection*{LỖI LẬP TRÌNH PHỔ BIẾN}
+\textit{Sử dụng sai đối tượng Random}
+
+Một đối tượng \texttt{Random} sẽ chọn một số nguyên ngẫu nhiên mới mỗi khi phương thức \texttt{nextInt} được gọi. Khi sinh viên cố gắng tạo ra một giá trị ngẫu nhiên có điều kiện ràng buộc, chẳng hạn như một số lẻ, đôi khi họ viết nhầm đoạn mã như sau:
+\begin{verbatim}
+// đoạn mã này chứa một lỗi (bug)
+Random r = new Random(); 
+ 
+if (r.nextInt() % 2 == 0) {
+    System.out.println("Even number: " + r.nextInt());
+} else {
+    System.out.println("Odd number: " + r.nextInt());
+}
+\end{verbatim}
+
+Đoạn mã trên thất bại trong nhiều trường hợp vì đối tượng \texttt{Random} tạo ra một số nguyên ngẫu nhiên để sử dụng trong kiểm tra điều kiện \texttt{if/else}, và sau đó lại tạo một số khác để sử dụng trong bất kỳ câu lệnh \texttt{println} nào được chọn để thực thi. Ví dụ, kiểm tra điều kiện \texttt{if} có thể nhận được giá trị ngẫu nhiên là 47 từ đối tượng \texttt{Random}. Phép thử sẽ thấy rằng $47 \% 2$ không bằng 0, vì vậy đoạn mã sẽ chuyển sang câu lệnh \texttt{else}. Câu lệnh \texttt{println} sau đó sẽ thực thi một lệnh gọi khác tới \texttt{nextInt}, lệnh này sẽ trả về một con số hoàn toàn khác (chẳng hạn như 128). Kết quả đầu ra của đoạn mã khi đó sẽ là câu lệnh kỳ lạ sau:
